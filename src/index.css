@@ -11,3 +11,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.bg-color{
+  background-color: #cee741;
+}
+.logo-font{
+  font-family: Bangers;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 50.6px;
+}
