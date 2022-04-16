@@ -10,6 +10,7 @@ export default function ChapterSelScreen() {
     const handleSelChap = useCallback(
         (val) => () => {
             console.log(val)// val = string
+            // navigate to "/novel/:novelId/:chapId"
         },
         [],
     )
