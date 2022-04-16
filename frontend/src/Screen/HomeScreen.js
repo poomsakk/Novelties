@@ -51,7 +51,7 @@ export default function HomeScreenContent() {
         <br></br>
         <Container>
             <Row xs={1} md={6} className="g-4">
-                {Array.from({ length: 10 }).map((_, idx) => (
+                {Array.from({ length: 15 }).map((_, idx) => (
                     <Col>
                         <Card>
                             <Card.Img variant="top" src={BookCover} />
