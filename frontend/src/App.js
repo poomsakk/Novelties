@@ -6,6 +6,8 @@ import NotFoundScreen from './Screen/NotFoundScreen';
 import RegisterScreen from './Screen/RegisterScreen';
 import LoginScreen from './Screen/LoginSceen';
 import FavoriteScreen from './Screen/FavoriteScreen';
+import ForgetPasswordScreen from './Screen/ForgetPasswordScreen';
+import ChangePasswordScreen from './Screen/ChangePasswordScreen'
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
           <Route path='/login' element={<LoginScreen></LoginScreen>}></Route>
           <Route path='*' element={<NotFoundScreen />} />
           <Route path='/favorite' element={<FavoriteScreen></FavoriteScreen>}></Route>
+          <Route path='/forgetpassword' element={<ForgetPasswordScreen></ForgetPasswordScreen>}></Route>
+          <Route path='/changepassword' element={<ChangePasswordScreen></ChangePasswordScreen>}></Route>
         </Routes>
       </main>
     </>
