@@ -3,6 +3,7 @@ import morgan from "morgan";
 import bodyParser from "body-parser";
 import dotenv from 'dotenv';
 import userRouter from "./Routes/userRoute.js";
+import novelRouter from "./Routes/novelRoute.js";
 import mongoose from "mongoose";
 import cors from 'cors';
 dotenv.config();
@@ -23,6 +24,7 @@ app.get('/hello', (req, res) => {
     res.send("hello world");
 })
 app.use('/api/users', userRouter);
+app.use('/api/novels', novelRouter);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {

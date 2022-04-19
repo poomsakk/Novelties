@@ -7,6 +7,7 @@ import RegisterScreen from './Screen/RegisterScreen';
 import LoginScreen from './Screen/LoginSceen';
 import FavoriteScreen from './Screen/FavoriteScreen';
 import ChapterSelScreen from './Screen/ChapterSelScreen';
+import AddNovel from './Screen/AddNovel';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path='*' element={<NotFoundScreen />} />
           <Route path='/favorite' element={<FavoriteScreen></FavoriteScreen>}></Route>
           <Route path='/ChapterSel' element={<ChapterSelScreen></ChapterSelScreen>}></Route>
+          <Route path='/addNovel' element={<AddNovel></AddNovel>}></Route>
         </Routes>
       </main>
     </>

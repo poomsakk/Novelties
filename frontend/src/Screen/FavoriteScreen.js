@@ -12,7 +12,7 @@ export default function FavoriteScreen() {
         <>
             <h1>Favorite</h1>
             <Button variant="danger" onClick={handle}>del</Button>
-            <a>coin have = {user.coin}</a>
+            <p>coin have = {user.coin}</p>
         </>
     )
 };

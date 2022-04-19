@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import { api } from '../api';
 
 export default function RegisterScreen() {
     const [name, setName] = useState("");
@@ -18,14 +19,7 @@ export default function RegisterScreen() {
             Swal.fire('Password not match!!', "Enter password and confirm it again", "warning")
             return;
         }
-        const response = await fetch('http://localhost:5000/api/users/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ name, email, password, }),
-        })
-        const data = await response.json()
+        const { data } = await api.post("/api/users/register", { name, email, password });
         if (data.message === "OK") {
             Swal.fire('Success', 'account has been created', 'success')
             navigate('/login');
@@ -33,6 +27,7 @@ export default function RegisterScreen() {
             Swal.fire('FAIL!!', data.message, "warning")
         }
     }
+
     return (
         <>
             <div className='form-layout'>
