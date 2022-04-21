@@ -22,6 +22,7 @@ function App() {
           <Route path='/favorite' element={<FavoriteScreen></FavoriteScreen>}></Route>
           <Route path='/ChapterSel' element={<ChapterSelScreen></ChapterSelScreen>}></Route>
           <Route path="/novel/:id" element={<NovelScreen></NovelScreen>} />
+          <Route path='/popular' element={<PopularScreen></PopularScreen>}></Route>
         </Routes>
       </main>
     </>
