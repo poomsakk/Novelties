@@ -25,7 +25,7 @@ export default function PopularScreen() {
                         Viewers : {data.Novel[0].allViewers}
                     </Card.Text>
                     <Card.Text>
-                        Rating  : {data.Novel[0].rating.allScore}/{data.Novel[0].rating.count}
+                        Rating  : {parseInt(data.Novel[0].rating.allScore)/parseInt(data.Novel[0].rating.count)}
                     </Card.Text>
                     <Button variant="primary">อ่านนิยาย</Button>
                 </Card.Body>
