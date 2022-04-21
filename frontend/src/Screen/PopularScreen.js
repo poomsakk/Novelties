@@ -5,7 +5,6 @@ export default function PopularScreen() {
     const user = data.Novel[1]
     const novel = data.Novel.length
 
-
     const handle = (e) => {
         console.log(user)
     }
@@ -15,6 +14,7 @@ export default function PopularScreen() {
             <Button variant="danger" onClick={handle}>del</Button>
             <p>coin have = {user.allViewers}</p>
             <p>novel = {novel}</p>
+            <img>src = {data.Novel[1].image}</img>
         </>
     )
 };
