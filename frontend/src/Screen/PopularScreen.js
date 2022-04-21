@@ -19,13 +19,13 @@ export default function PopularScreen() {
             <Form>
                 <Row>
                     <Col xs={7}>
-                    <Form.Control placeholder="City" />
+                    <img src = {data.Novel[1].image} />
                     </Col>
                     <Col>
-                    <Form.Control placeholder="State" />
+                    <p>views = {user.allViewers}</p>
                     </Col>
                     <Col>
-                    <Form.Control placeholder="Zip" />
+                    <p>chapters = {novel}</p>
                     </Col>
                 </Row>
             </Form>
