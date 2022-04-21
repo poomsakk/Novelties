@@ -19,9 +19,6 @@ export default function PopularScreen() {
             <Form>
                 <Row>
                     <Col>
-                    <img src = {data.Novel[1].image} height={200} width={200}/>
-                    </Col>
-                    <Col>
                     <p>views = {user.allViewers}</p>
                     </Col>
                     <Col>
@@ -30,7 +27,7 @@ export default function PopularScreen() {
                 </Row>
                 <Row>
                     <Col>
-                    <img src = {data.Novel[0].image} height={200} width={200}/>
+                    <p>name = {data.Novel[0].name}</p>
                     </Col>
                 </Row>
             </Form>
