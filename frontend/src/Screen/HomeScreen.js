@@ -66,33 +66,7 @@ export default function HomeScreenContent() {
             </Carousel.Item>
         </Carousel>
         <br></br>
-        <Container>
-            <h2>
-                All novels
-            </h2>
-        </Container>
-        <br></br>
-        <Container>
-            <Row xs={1} md={5} className="g-4">
-                {novels.map((novel) => {
-                    return <Col>
-                        <Card tag="a" onClick={handleSelNovel(novel._id)} style={{ cursor: "pointer" }}>
-                            <Card.Img variant="top" src={BookCover} />
-                            <Card.Body>
-                                <Card.Title>{novel.name}</Card.Title>
-                                <ListGroup variant="flush">
-                                    <ListGroup.Item><Badge bg="primary">{novel.allViewers}</Badge> views</ListGroup.Item>
-                                    <ListGroup.Item>Rating <Badge bg="warning">{parseInt(novel.rating.allScore / novel.rating.count)}</Badge></ListGroup.Item>
-                                    < ListGroup.Item > Chapter : {novel.allChapter.length}</ListGroup.Item>
-                                </ListGroup>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                })}
-
-            </Row>
-            <br /><br /><br /><br />
-        </Container>
+        
     </>)
 };
 
