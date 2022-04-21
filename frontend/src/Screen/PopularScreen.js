@@ -10,7 +10,7 @@ export default function PopularScreen() {
     }
     return (
         <>
-            <h1>Favorite</h1>
+            <h1>Popular</h1>
             <Button variant="danger" onClick={handle}>del</Button>
             <p>coin have = {user.coin}</p>
         </>
