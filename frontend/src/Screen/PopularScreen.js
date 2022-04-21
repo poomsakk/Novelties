@@ -1,4 +1,4 @@
-import { Button,Form } from 'react-bootstrap';
+import { Button,Form,Col,Row } from 'react-bootstrap';
 import data from "../sampleData.js";
 import React from 'react';
 
@@ -33,9 +33,9 @@ export default function PopularScreen() {
     )
 };
 
-<div>
+{/* <div>
                 <img src = {data.Novel[1].image} height={200} width={200}/>
                 <p>views = {user.allViewers}</p>
                 <p>chapters = {novel}</p>
                 <p>{data.Novel[1].image}</p>
-            </div>
+            </div> */}
