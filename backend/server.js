@@ -6,6 +6,7 @@ import userRouter from "./Routes/userRoute.js";
 import novelRouter from "./Routes/novelRoute.js";
 import mongoose from "mongoose";
 import cors from 'cors';
+import Novel from "./Models/novelModel.js"
 dotenv.config();
 
 const app = express();
@@ -19,12 +20,16 @@ app.use(bodyParser.json());
 app.use(cors())
 
 //route
-app.get('/', (req, res) => res.send("DB CONNECTED"))
-app.get('/hello', (req, res) => {
-    res.send("hello world");
-})
 app.use('/api/users', userRouter);
 app.use('/api/novels', novelRouter);
+app.get('/api/novels', async (req, res) => {
+    const novels = await Novel.find({})
+    res.send(novels);
+})
+app.get('/api/novels/:id', async (req, res) => {
+    const novel = await Novel.findOne({ _id: req.params.id });
+    res.send(novel);
+})
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {

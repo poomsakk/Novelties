@@ -1,18 +1,31 @@
 import { Carousel, Card, Row, Col, Container, ListGroup, Badge } from 'react-bootstrap';
 import Gray from '../images/gray.png'
 import BookCover from '../images/bookCover.jpg'
-import data from "../sampleData"
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { api } from '../api';
+import { useNavigate } from 'react-router-dom';
 
 export default function HomeScreenContent() {
+    const [novels, setNovels] = useState([]);
+    const navigate = useNavigate();
+
+    const getNovel = () => {
+        return api.get("/api/novels")
+            .then((response) => setNovels(response.data));
+    }
 
     const handleSelNovel = useCallback(
         (novelId) => () => {
-            console.log(novelId)// val = string
-            //navigte to "/novel/val"
+            // novelId is string
+            navigate("/novel/" + novelId);
         },
-        [],
+        [navigate],
     )
+
+    useEffect(() => {
+        setNovels([])
+        getNovel()
+    }, [])
 
     return (<>
         <Carousel>
@@ -61,7 +74,7 @@ export default function HomeScreenContent() {
         <br></br>
         <Container>
             <Row xs={1} md={5} className="g-4">
-                {data.Novel.map((novel) => {
+                {novels.map((novel) => {
                     return <Col>
                         <Card tag="a" onClick={handleSelNovel(novel._id)} style={{ cursor: "pointer" }}>
                             <Card.Img variant="top" src={BookCover} />
@@ -69,8 +82,8 @@ export default function HomeScreenContent() {
                                 <Card.Title>{novel.name}</Card.Title>
                                 <ListGroup variant="flush">
                                     <ListGroup.Item><Badge bg="primary">{novel.allViewers}</Badge> views</ListGroup.Item>
-                                    <ListGroup.Item>Rating <Badge bg="warning">{novel.rating.allScore / novel.rating.count}</Badge></ListGroup.Item>
-                                    <ListGroup.Item>Chapter : {novel.allChapter.length}</ListGroup.Item>
+                                    <ListGroup.Item>Rating <Badge bg="warning">{parseInt(novel.rating.allScore / novel.rating.count)}</Badge></ListGroup.Item>
+                                    < ListGroup.Item > Chapter : {novel.allChapter.length}</ListGroup.Item>
                                 </ListGroup>
                             </Card.Body>
                         </Card>
