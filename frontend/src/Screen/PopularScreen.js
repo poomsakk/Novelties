@@ -14,16 +14,16 @@ export default function PopularScreen() {
             <h1>Popular</h1>
             {/* <Button variant="danger" onClick={handle}>del</Button> */}
             <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={data.Novel[0].image} height={200} width={200} />
+                <Card.Img variant="top" src={data.Novel[0].image} height={200} width={300} />
                 <Card.Body>
                     <Card.Title>{data.Novel[0].name}</Card.Title>
                     <Card.Text>
                         Some quick example text to build on the card title and make up the bulk of
                         the card's content.(Novel Detail)
                     </Card.Text>
-                    {/* <Card.Text>
+                    <Card.Text>
                         Viewers : {data.Novel[0].allViewers}    Rating : {data.Novel[0].rating}    
-                    </Card.Text> */}
+                    </Card.Text>
                     <Button variant="primary">อ่านนิยาย</Button>
                 </Card.Body>
             </Card>
