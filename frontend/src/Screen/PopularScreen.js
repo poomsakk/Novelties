@@ -4,8 +4,8 @@ import React from 'react';
 
 
 export default function PopularScreen() {
-    const user = data.Novel[1]
-    const novel = data.Novel[1].allChapter.length
+    const user = data.Novel[0]
+    const novel = data.Novel[0].allChapter.length
     const handle = (e) => {
         console.log(user)
     }
@@ -20,7 +20,13 @@ export default function PopularScreen() {
                     </Col>
                     <Col>
                         <Row>
-                            <p>name = {data.Novel[0].name}</p>
+                            <p>
+                                {' '}
+                                name = {data.Novel[0].name}
+
+
+                                {' '}
+                            </p>
                         </Row>
                         <Row>
                             <p>views = {user.allViewers}</p>
