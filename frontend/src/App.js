@@ -8,6 +8,8 @@ import LoginScreen from './Screen/LoginSceen';
 import FavoriteScreen from './Screen/FavoriteScreen';
 import ForgetPasswordScreen from './Screen/ForgetPasswordScreen';
 import ChangePasswordScreen from './Screen/ChangePasswordScreen'
+import NovelScreen from './Screen/NovelScreen';
+
 
 function App() {
   return (
@@ -22,6 +24,7 @@ function App() {
           <Route path='/favorite' element={<FavoriteScreen></FavoriteScreen>}></Route>
           <Route path='/forgetpassword' element={<ForgetPasswordScreen></ForgetPasswordScreen>}></Route>
           <Route path='/changepassword' element={<ChangePasswordScreen></ChangePasswordScreen>}></Route>
+          <Route path="/novel/:id" element={<NovelScreen></NovelScreen>} />
         </Routes>
       </main>
     </>
