@@ -12,14 +12,19 @@ export default function PopularScreen() {
     return (
         <>
             <h1>Popular</h1>
-            <Button variant="danger" onClick={handle}>del</Button>
-            <p>views = {user.allViewers}</p>
-            <p>chapters = {novel}</p>
-            <p>{data.Novel[1].image}</p>
+            {/* <Button variant="danger" onClick={handle}>del</Button> */}
             <Form>
                 <Row>
                     <Col>
-                    <p>views = {user.allViewers}</p>
+                        <img src = {data.Novel[0].image} height={200} width={200}/>
+                    </Col>
+                    <Col>
+                        <Row>
+                            <p>name = {data.Novel[0].name}</p>
+                        </Row>
+                        <Row>
+                            <p>views = {user.allViewers}</p>
+                        </Row>
                     </Col>
                     <Col>
                     <p>chapters = {novel}</p>
@@ -27,7 +32,7 @@ export default function PopularScreen() {
                 </Row>
                 <Row>
                     <Col>
-                    <p>name = {data.Novel[0].name}</p>
+                    
                     </Col>
                 </Row>
             </Form>
