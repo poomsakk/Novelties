@@ -23,6 +23,8 @@ export default function PopularScreen() {
                     </Card.Text>
                     <Card.Text>
                         Viewers : {data.Novel[0].allViewers}
+                    </Card.Text>
+                    <Card.Text>
                         Rating  : {data.Novel[0].rating}
                     </Card.Text>
                     <Button variant="primary">อ่านนิยาย</Button>
