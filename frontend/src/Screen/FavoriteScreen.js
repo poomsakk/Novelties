@@ -1,10 +1,7 @@
 import { Button } from 'react-bootstrap';
 import data from "../sampleData.js";
-
 export default function FavoriteScreen() {
     const user = data.Users[1]
-
-
     const handle = (e) => {
         console.log(user)
     }

@@ -53,13 +53,17 @@ export default function LoginScreen() {
                         <Form.Text className="text-muted">
                         </Form.Text>
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Group className="d-grid gap-2 d-md-flex justify-content-md-end" controlId="formBasicPassword">
+                        <p><a href='/forgetpassword'>Forgot password?</a></p>
+                    </Form.Group>
+                    <div className="d-grid gap-2">
+                        <button class="btn btn-primary" type="Submit">Login</button>
+                    </div>
+                    <br></br>
+                    <br></br>
+                    <Form.Group className="d-grid gap-2 d-md-flex justify-content-center" controlId="formBasicPassword">
                         <p>Don't have an account <a href='/register'>Create account</a></p>
                     </Form.Group>
-
-                    <Button variant="primary" type="submit">
-                        Submit
-                    </Button>
                 </Form>
             </div>
         </>
