@@ -27,3 +27,7 @@ code {
   margin: 6rem 30%;
   padding: 0;
 }
+
+.content-summary{
+  word-wrap: break-word;
+}

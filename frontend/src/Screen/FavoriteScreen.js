@@ -2,7 +2,7 @@ import { Button } from 'react-bootstrap';
 import data from "../sampleData.js";
 
 export default function FavoriteScreen() {
-    const user = data.Users[0]
+    const user = data.Users[1]
 
 
     const handle = (e) => {
@@ -12,7 +12,7 @@ export default function FavoriteScreen() {
         <>
             <h1>Favorite</h1>
             <Button variant="danger" onClick={handle}>del</Button>
-            <a>coin have = {user.coin}</a>
+            <p>coin have = {user.coin}</p>
         </>
     )
 };

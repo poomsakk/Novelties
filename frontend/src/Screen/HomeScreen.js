@@ -1,8 +1,31 @@
-import { Carousel, Card, Row, Col, Container } from 'react-bootstrap';
+import { Carousel, Card, Row, Col, Container, ListGroup, Badge } from 'react-bootstrap';
 import Gray from '../images/gray.png'
 import BookCover from '../images/bookCover.jpg'
+import { useCallback, useEffect, useState } from 'react';
+import { api } from '../api';
+import { useNavigate } from 'react-router-dom';
 
 export default function HomeScreenContent() {
+    const [novels, setNovels] = useState([]);
+    const navigate = useNavigate();
+
+    const getNovel = () => {
+        return api.get("/api/novels")
+            .then((response) => setNovels(response.data));
+    }
+
+    const handleSelNovel = useCallback(
+        (novelId) => () => {
+            // novelId is string
+            navigate("/novel/" + novelId);
+        },
+        [navigate],
+    )
+
+    useEffect(() => {
+        setNovels([])
+        getNovel()
+    }, [])
 
     return (<>
         <Carousel>
@@ -50,22 +73,40 @@ export default function HomeScreenContent() {
         </Container>
         <br></br>
         <Container>
-            <Row xs={1} md={6} className="g-4">
-                {Array.from({ length: 10 }).map((_, idx) => (
-                    <Col>
-                        <Card>
+            <Row xs={1} md={5} className="g-4">
+                {novels.map((novel) => {
+                    return <Col>
+                        <Card tag="a" onClick={handleSelNovel(novel._id)} style={{ cursor: "pointer" }}>
                             <Card.Img variant="top" src={BookCover} />
                             <Card.Body>
-                                <Card.Title>Card title</Card.Title>
-                                <Card.Text>
-                                    This is a longer card with supporting text below as a natural
-                                    lead-in to additional content. This content is a little bit longer.
-                                </Card.Text>
+                                <Card.Title>{novel.name}</Card.Title>
+                                <ListGroup variant="flush">
+                                    <ListGroup.Item><Badge bg="primary">{novel.allViewers}</Badge> views</ListGroup.Item>
+                                    <ListGroup.Item>Rating <Badge bg="warning">{parseInt(novel.rating.allScore / novel.rating.count)}</Badge></ListGroup.Item>
+                                    < ListGroup.Item > Chapter : {novel.allChapter.length}</ListGroup.Item>
+                                </ListGroup>
                             </Card.Body>
                         </Card>
                     </Col>
-                ))}
+                })}
+
             </Row>
+            <br /><br /><br /><br />
         </Container>
     </>)
 };
+
+// {Array.from({ length: 15 }).map((_, idx) => (
+//     <Col>
+//         <Card>
+//             <Card.Img variant="top" src={BookCover} />
+//             <Card.Body>
+//                 <Card.Title>Card title</Card.Title>
+//                 <Card.Text>
+//                     This is a longer card with supporting text below as a natural
+//                     lead-in to additional content. This content is a little bit longer.
+//                 </Card.Text>
+//             </Card.Body>
+//         </Card>
+//     </Col>
+// ))}

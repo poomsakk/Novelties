@@ -2,11 +2,14 @@ import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { changeUserName } from '../action/userAction';
+import { useDispatch } from "react-redux"
 
 export default function LoginScreen() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -23,11 +26,7 @@ export default function LoginScreen() {
         const data = await response.json()
         if (data.message === "OK") {
             localStorage.setItem('userName', data.name)
-            localStorage.setItem('token', data.token)
-            let x1 = localStorage.getItem("userName")
-            let x2 = localStorage.getItem("token")
-            console.log("x1 = ", x1)
-            console.log('x2 = ', x2)
+            dispatch(changeUserName(data.name))
             Swal.fire('Login Successful', '', 'success')
             navigate('/');
         } else {
