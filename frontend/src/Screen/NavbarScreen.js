@@ -20,8 +20,19 @@ export default function NavbarScreen() {
                     <Nav.Link href="/">Home</Nav.Link>
                     <Nav.Link href="#Popular">Popular</Nav.Link>
                     <Nav.Link href="#Favorite">Favorite</Nav.Link>
+                    
                 </Nav>
+                
+                <form action="" class="d-flex w-10 p-3" >
+                    <div class="input-group mb-30" >
+                        <input type="text" class="form-control mr-sm-2" placeholder="ค้นหานิยาย"></input>
+                            <button type="submit" class="input-group-text btn-default"><i class="bi bi-search me-30"></i> 
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Search_Icon.svg/1024px-Search_Icon.svg.png" width="20" />
+                            </button>
+                    </div>
+                </form>
                 <Navbar.Toggle />
+                
                 <Nav onSelect={handleSelect}>
                     <Navbar.Collapse className="justify-content-end">
                         {

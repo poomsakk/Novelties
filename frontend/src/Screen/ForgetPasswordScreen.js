@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import data from "../sampleData.js";
 
 export default function ForgetPasswordScreen(){
-    /*const [password, ForgetPassword] = useState("")*/
     const [email, setEmail] = useState("")
     const navigate = useNavigate();
 
