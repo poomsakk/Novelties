@@ -21,9 +21,9 @@ export default function PopularScreen() {
                         Some quick example text to build on the card title and make up the bulk of
                         the card's content.(Novel Detail)
                     </Card.Text>
-                    <Card.Text>
+                    {/* <Card.Text>
                         Viewers : {data.Novel[0].allViewers}    Rating : {data.Novel[0].rating}    
-                    </Card.Text>
+                    </Card.Text> */}
                     <Button variant="primary">อ่านนิยาย</Button>
                 </Card.Body>
             </Card>
@@ -31,9 +31,9 @@ export default function PopularScreen() {
     )
 };
 
-{/* <div>
-                <img src = {data.Novel[1].image} height={200} width={200}/>
-                <p>views = {user.allViewers}</p>
-                <p>chapters = {novel}</p>
-                <p>{data.Novel[1].image}</p>
-            </div> */}
+// {/* <div>
+//                 <img src = {data.Novel[1].image} height={200} width={200}/>
+//                 <p>views = {user.allViewers}</p>
+//                 <p>chapters = {novel}</p>
+//                 <p>{data.Novel[1].image}</p>
+//             </div> */}
