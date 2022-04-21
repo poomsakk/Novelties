@@ -1,35 +1,43 @@
-import { Button,Card } from 'react-bootstrap';
+import { Card,Container,ListGroup,Badge,Col,Row } from 'react-bootstrap';
 import data from "../sampleData.js";
 import React from 'react';
 
 
+
 export default function PopularScreen() {
-    const user = data.Novel[0]
-    const novel = data.Novel[0].allChapter.length
+    const novels = data.Novel
     const handle = (e) => {
-        console.log(user)
+        console.log(novels)
     }
     return (
         <>
             <h1>Popular</h1>
             {/* <Button variant="danger" onClick={handle}>del</Button> */}
-            <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={data.Novel[0].image} height={200} width={500} />
-                <Card.Body>
-                    <Card.Title>{data.Novel[0].name}</Card.Title>
-                    <Card.Text>
-                        Some quick example text to build on the card title and make up the bulk of
-                        the card's content.(Novel Detail)
-                    </Card.Text>
-                    <Card.Text>
-                        Viewers : {data.Novel[0].allViewers}
-                    </Card.Text>
-                    <Card.Text>
-                        Rating  : {parseInt(data.Novel[0].rating.allScore)/parseInt(data.Novel[0].rating.count)}
-                    </Card.Text>
-                    <Button variant="primary">อ่านนิยาย</Button>
-                </Card.Body>
-            </Card>
+            <br></br>
+        <Container>
+            <Row xs={1} md={5} className="g-4">
+                {novels.map((novel) => {
+                    // novel.allViewers.sort()
+                    return <Col>
+                        <Card>
+                            <Card.Img variant="top" src={novel.image} />
+                            <Card.Body>
+                                <Card.Title>{novel.name}</Card.Title>
+                                <Card.Text>เรื่องย่อ...</Card.Text>
+                                <ListGroup variant="flush">
+                                    <ListGroup.Item><Badge bg="primary">{novel.allViewers}</Badge> views</ListGroup.Item>
+                                    <ListGroup.Item>Rating <Badge bg="warning">{novel.rating.allScore / novel.rating.count}</Badge></ListGroup.Item>
+                                    < ListGroup.Item > Chapter : {novel.allChapter.length}</ListGroup.Item>
+                                </ListGroup>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                })}
+
+            </Row>
+            <br /><br /><br /><br />
+        </Container>
+            
         </>
     )
 };

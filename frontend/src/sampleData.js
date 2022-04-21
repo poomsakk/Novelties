@@ -36,8 +36,8 @@ const data = {
             _id: "n1id",
             name: "N1name",
             category: [{ name: "adventure" }, { name: "adult" }],
-            allViewers: "4100000",
-            rating: { allScore: "500", count: "20" },
+            allViewers: 4100000,
+            rating: { allScore: 500, count: 20 },
             image: "../images/bookCover.jpg",
             allChapter: [
                 { chapter: "1", name: "chap name1", detail: "dasdsadsadsadas", price: "400", viewers: "201" },
@@ -52,14 +52,46 @@ const data = {
             _id: "n2id",
             name: "N2name",
             category: [{ name: "adventure" }, { name: "adult" }],
-            allViewers: "4100000",
-            rating: { allScore: "500", count: "20" },
+            allViewers: 78500,
+            rating: { allScore: 500, count: 20 },
             writerId: "sddsdadsds",
             image: "../images/bookCover.jpg",
             allChapter: [
                 { chapter: "1", name: "chap name1", detail: "dasdsadsadsadas", viewers: "201" },
                 { chapter: "2", name: "chap name2", detail: "dasdsdasdsaddsasadas", viewers: "201" },
                 { chapter: "3", name: "chap name3", detail: "dassdsaadsadsasadas", viewers: "20" },
+            ]
+        },
+        {
+            _id: "n3id",
+            name: "N3name",
+            category: [{ name: "adventure" }, { name: "adult" }],
+            allViewers: 3500,
+            rating: { allScore: 129, count: 20 },
+            image: "../images/bookCover.jpg",
+            allChapter: [
+                { chapter: "1", name: "chap name1", detail: "dasdsadsadsadas", price: "400", viewers: "201" },
+                { chapter: "2", name: "chap name2", detail: "dasdsdasdsaddsasadas", price: "400", viewers: "201" },
+                { chapter: "3", name: "chap name3", detail: "dasdsdasdsaddsasadas", price: "400", viewers: "201" },
+                { chapter: "4", name: "chap name4", detail: "dasdsdasdsaddsasadas", price: "400", viewers: "201" },
+                { chapter: "5", name: "chap name5", detail: "dasdsdasdsaddsasadas", price: "400", viewers: "201" },
+                { chapter: "6", name: "chap name6", detail: "dasdsdasdsaddsasadas", price: "400", viewers: "201" },
+            ]
+        },
+        {
+            _id: "n4id",
+            name: "N4name",
+            category: [{ name: "adventure" }, { name: "adult" }],
+            allViewers: 38000,
+            rating: { allScore: 500, count: 20 },
+            image: "../images/bookCover.jpg",
+            allChapter: [
+                { chapter: "1", name: "chap name1", detail: "dasdsadsadsadas", price: "400", viewers: "201" },
+                { chapter: "2", name: "chap name2", detail: "dasdsdasdsaddsasadas", price: "400", viewers: "201" },
+                { chapter: "3", name: "chap name3", detail: "dasdsdasdsaddsasadas", price: "400", viewers: "201" },
+                { chapter: "4", name: "chap name4", detail: "dasdsdasdsaddsasadas", price: "400", viewers: "201" },
+                { chapter: "5", name: "chap name5", detail: "dasdsdasdsaddsasadas", price: "400", viewers: "201" },
+                { chapter: "6", name: "chap name6", detail: "dasdsdasdsaddsasadas", price: "400", viewers: "201" },
             ]
         }
     ],
