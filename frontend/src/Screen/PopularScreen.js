@@ -16,7 +16,7 @@ export default function PopularScreen() {
             <p>coin have = {user.allViewers}</p>
             <p>novel = {novel}</p>
             <div>
-                <img src = "./images/bookCover.jpg" height={200} width={200}/>
+                <img src = {data.Novel[2].image} height={200} width={200}/>
             </div>
         </>
     )
