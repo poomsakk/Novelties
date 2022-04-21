@@ -14,7 +14,7 @@ export default function PopularScreen() {
             <h1>Popular</h1>
             {/* <Button variant="danger" onClick={handle}>del</Button> */}
             <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={data.Novel[0].image} height={200} width={300} />
+                <Card.Img variant="top" src={data.Novel[0].image} height={200} width={500} />
                 <Card.Body>
                     <Card.Title>{data.Novel[0].name}</Card.Title>
                     <Card.Text>
