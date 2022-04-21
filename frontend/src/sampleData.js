@@ -38,7 +38,7 @@ const data = {
             category: [{ name: "adventure" }, { name: "adult" }],
             allViewers: "4100000",
             rating: { allScore: "500", count: "20" },
-            image: "../images/bookCover.jpg",
+            image: "./images/bookCover.jpg",
             allChapter: [
                 { chapter: "1", name: "chap name1", detail: "dasdsadsadsadas", price: "400", viewers: "201" },
                 { chapter: "2", name: "chap name2", detail: "dasdsdasdsaddsasadas", price: "400", viewers: "201" },
@@ -55,7 +55,7 @@ const data = {
             allViewers: "4100000",
             rating: { allScore: "500", count: "20" },
             writerId: "sddsdadsds",
-            image: "../images/bookCover.jpg",
+            image: "./images/bookCover.jpg",
             allChapter: [
                 { chapter: "1", name: "chap name1", detail: "dasdsadsadsadas", viewers: "201" },
                 { chapter: "2", name: "chap name2", detail: "dasdsdasdsaddsasadas", viewers: "201" },
