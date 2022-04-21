@@ -28,6 +28,11 @@ export default function PopularScreen() {
                     <p>chapters = {novel}</p>
                     </Col>
                 </Row>
+                <Row>
+                    <Col>
+                    <img src = {data.Novel[0].image} height={200} width={200}/>
+                    </Col>
+                </Row>
             </Form>
         </>
     )
