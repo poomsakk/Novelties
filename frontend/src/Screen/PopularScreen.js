@@ -6,9 +6,11 @@ import React from 'react';
 
 export default function PopularScreen() {
     const novels = data.Novel
-    const handle = (e) => {
-        console.log(novels)
+    const x = []
+    for(let i=0;i>=data.Novel.length;i++){
+        x.push(data.Novel[i].allViewers)
     }
+    
     return (
         <>
             <h1>Popular</h1>
