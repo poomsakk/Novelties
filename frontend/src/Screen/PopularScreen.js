@@ -20,8 +20,8 @@ export default function PopularScreen() {
                     <Card.Text>
                         Some quick example text to build on the card title and make up the bulk of
                         the card's content.(Novel Detail)
-                    </Card.Text>
-                    <Card.Text>
+
+
                         Viewers : {data.Novel[0].allViewers}    Rating : {data.Novel[0].rating}    
                     </Card.Text>
                     <Button variant="primary">อ่านนิยาย</Button>
