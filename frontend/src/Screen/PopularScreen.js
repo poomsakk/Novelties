@@ -18,8 +18,8 @@ export default function PopularScreen() {
             <p>{data.Novel[1].image}</p>
             <Form>
                 <Row>
-                    <Col xs={7}>
-                    <img src = {data.Novel[1].image} />
+                    <Col>
+                    <img src = {data.Novel[1].image} height={200} width={200}/>
                     </Col>
                     <Col>
                     <p>views = {user.allViewers}</p>
