@@ -8,6 +8,7 @@ import LoginScreen from './Screen/LoginSceen';
 import FavoriteScreen from './Screen/FavoriteScreen';
 import ChapterSelScreen from './Screen/ChapterSelScreen';
 import NovelScreen from './Screen/NovelScreen';
+import PopularScreen from './Screen/PopularScreen';
 
 function App() {
   return (
