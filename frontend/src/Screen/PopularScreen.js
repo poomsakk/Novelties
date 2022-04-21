@@ -21,6 +21,9 @@ export default function PopularScreen() {
                         Some quick example text to build on the card title and make up the bulk of
                         the card's content.(Novel Detail)
                     </Card.Text>
+                    <Card.Text>
+                        fdsfdsfsdfsdfsdfdsfdssssssssssssssssssssssssssssssssssssssssssssssssssssss
+                    </Card.Text>
                     <Button variant="primary">อ่านนิยาย</Button>
                 </Card.Body>
             </Card>
