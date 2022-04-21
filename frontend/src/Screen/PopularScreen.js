@@ -15,8 +15,9 @@ export default function PopularScreen() {
             <Button variant="danger" onClick={handle}>del</Button>
             <p>coin have = {user.allViewers}</p>
             <p>novel = {novel}</p>
+            <p>{data.Novel[1].image}</p>
             <div>
-                <img src = {data.Novel[2].image} height={200} width={200}/>
+                <img src = {data.Novel[1].image} height={200} width={200}/>
             </div>
         </>
     )
