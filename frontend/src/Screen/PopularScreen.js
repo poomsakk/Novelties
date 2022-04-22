@@ -11,7 +11,7 @@ export default function PopularScreen() {
     
     return (
         <>
-            <h1>Popular</h1>
+            <h1>Popular Novels</h1>
             {/* <Button variant="danger" onClick={handle}>del</Button> */}
             <br></br>
         
@@ -20,21 +20,26 @@ export default function PopularScreen() {
                     // novel.allViewers.sort()
                     return <CardGroup>
                     <Card>
-                        <Card.Img variant="top" src={novel.image}/>
+                        <Card.Body>
+                            <Card.Img variant="top" src={novel.image}/>
+                        </Card.Body>
                     </Card>
                     <Card>
-                        <Card.Title>{novel.name}</Card.Title>
-                        <Card.Text>{novel.detail}</Card.Text>
-                        <Row>
+                        <Card.Body>
+                        <Card.Title style={{fontSize : 24}}>{novel.name}</Card.Title>
+                        <Card.Text style={{fontSize : 15}}>{novel.detail}</Card.Text>
+                        <Card.Text style={{fontSize : 15}}>Writer : </Card.Text>
+                        <Col>
                         {novel.category.map((categories) => {
-                            return <Col><Button variant="outline-danger" style={{fontSize : 15}}>{categories.name}</Button></Col>   
+                            return <Button variant="outline-danger" style={{fontSize : 10}}>{categories.name}</Button>
                         })}
-                        </Row>
+                        </Col>
                         <ListGroup variant="flush">
                             <ListGroup.Item style={{fontSize : 15}}><Badge bg="primary">{novel.allViewers}</Badge> views</ListGroup.Item>
                             <ListGroup.Item style={{fontSize : 15}}>Rating <Badge bg="warning">{novel.rating.allScore / novel.rating.count}</Badge></ListGroup.Item>
                             <ListGroup.Item style={{fontSize : 15}}> Chapter : {novel.allChapter.length}</ListGroup.Item>
                         </ListGroup>
+                        </Card.Body>
                     </Card>
                     </CardGroup>
                 {/* </Card> */}
