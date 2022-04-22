@@ -1,4 +1,4 @@
-import { Card,Container,ListGroup,Badge,Col,Row } from 'react-bootstrap';
+import { Card,Container,ListGroup,Badge,Col,Row, CardGroup,Button } from 'react-bootstrap';
 import data from "../sampleData.js";
 import React from 'react';
 
@@ -6,47 +6,59 @@ import React from 'react';
 
 export default function PopularScreen() {
     const novels = data.Novel
-    const x = []
-    for(let i=0;i>=data.Novel.length;i++){
-        x.push(data.Novel[i].allViewers)
-    }
+    novels.sort((a,b) => (a.allViewers < b.allViewers) ? 1 : -1)
+    console.log(novels)
     
     return (
         <>
             <h1>Popular</h1>
             {/* <Button variant="danger" onClick={handle}>del</Button> */}
             <br></br>
-        <Container>
-            <Row xs={1} md={5} className="g-4">
+        
+        <Container>    
                 {novels.map((novel) => {
                     // novel.allViewers.sort()
-                    return <Col>
-                        <Card>
-                            <Card.Img variant="top" src={novel.image} />
-                            <Card.Body>
-                                <Card.Title>{novel.name}</Card.Title>
-                                <Card.Text>เรื่องย่อ...</Card.Text>
-                                <ListGroup variant="flush">
-                                    <ListGroup.Item><Badge bg="primary">{novel.allViewers}</Badge> views</ListGroup.Item>
-                                    <ListGroup.Item>Rating <Badge bg="warning">{novel.rating.allScore / novel.rating.count}</Badge></ListGroup.Item>
-                                    < ListGroup.Item > Chapter : {novel.allChapter.length}</ListGroup.Item>
-                                </ListGroup>
-                            </Card.Body>
-                        </Card>
-                    </Col>
+                    return <CardGroup>
+                    <Card>
+                        <Card.Img variant="top" src={novel.image}/>
+                    </Card>
+                    <Card>
+                        <Card.Title>{novel.name}</Card.Title>
+                        <Card.Text>{novel.detail}</Card.Text>
+                        <Row>
+                        {novel.category.map((categories) => {
+                            return <Col><Button variant="outline-danger" style={{fontSize : 15}}>{categories.name}</Button></Col>   
+                        })}
+                        </Row>
+                        <ListGroup variant="flush">
+                            <ListGroup.Item style={{fontSize : 15}}><Badge bg="primary">{novel.allViewers}</Badge> views</ListGroup.Item>
+                            <ListGroup.Item style={{fontSize : 15}}>Rating <Badge bg="warning">{novel.rating.allScore / novel.rating.count}</Badge></ListGroup.Item>
+                            <ListGroup.Item style={{fontSize : 15}}> Chapter : {novel.allChapter.length}</ListGroup.Item>
+                        </ListGroup>
+                    </Card>
+                    </CardGroup>
+                {/* </Card> */}
                 })}
 
-            </Row>
+           
             <br /><br /><br /><br />
-        </Container>
-            
+        
+        </Container>    
         </>
     )
 };
 
-// {/* <div>
-//                 <img src = {data.Novel[1].image} height={200} width={200}/>
-//                 <p>views = {user.allViewers}</p>
-//                 <p>chapters = {novel}</p>
-//                 <p>{data.Novel[1].image}</p>
-//             </div> */}
+{/* <Card.Img variant="top" src={novel.image} />
+                            <Card.Body>
+                            <Col>
+                                <Card.Title>{novel.name}</Card.Title>
+                                <Card.Text>เรื่องย่อ...</Card.Text>
+                            </Col>
+                            <Col>
+                                <ListGroup variant="flush">
+                                    <ListGroup.Item><Badge bg="primary">{novel.allViewers}</Badge> views</ListGroup.Item>
+                                    <ListGroup.Item>Rating <Badge bg="warning">{novel.rating.allScore / novel.rating.count}</Badge></ListGroup.Item>
+                                    <ListGroup.Item> Chapter : {novel.allChapter.length}</ListGroup.Item>
+                                </ListGroup>
+                            </Col>
+                            </Card.Body> */}
