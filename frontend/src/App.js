@@ -8,6 +8,7 @@ import LoginScreen from './Screen/LoginSceen';
 import FavoriteScreen from './Screen/FavoriteScreen';
 import ChapterSelScreen from './Screen/ChapterSelScreen';
 import NovelScreen from './Screen/NovelScreen';
+import topupScreen from './Screen/topupScreen';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path='/favorite' element={<FavoriteScreen></FavoriteScreen>}></Route>
           <Route path='/ChapterSel' element={<ChapterSelScreen></ChapterSelScreen>}></Route>
           <Route path="/novel/:id" element={<NovelScreen></NovelScreen>} />
+          <Route path="/topup" element={<topupScreen></topupScreen>} ></Route>
         </Routes>
       </main>
     </>
@@ -29,3 +31,4 @@ function App() {
 }
 
 export default App;
+
