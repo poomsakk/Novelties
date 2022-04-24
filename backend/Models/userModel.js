@@ -10,11 +10,6 @@ const ownChapSchema = new mongoose.Schema({
     expDate: { type: Date, required: true }
 })
 
-const ownNovelSchema = new mongoose.Schema({
-    novelId: { type: String, required: true },
-    ownChap: [ownChapSchema]
-})
-
 const ratingSchema = new mongoose.Schema({
     novelId: { type: String, required: true },
     score: { type: String, required: true }
@@ -27,7 +22,7 @@ const userSchema = new mongoose.Schema({
     isAdmin: { type: Boolean, required: true, default: false },
     coin: { type: Number, required: true, default: 0 },
     favorite: [favoriteSchema],
-    ownNovel: [ownNovelSchema],
+    ownChap: [ownChapSchema],
     rating: [ratingSchema]
 }, { timestamps: true });
 

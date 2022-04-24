@@ -5,26 +5,66 @@ import { api } from '../api';
 import { isLogin } from '../auth';
 import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { useSelector } from 'react-redux';
+
 
 export default function NovelScreen() {
     const [novel, setNovel] = useState({});
     const { id } = useParams()
     const [favChecked, setFavChecked] = useState(false);
     const navigate = useNavigate()
+    const { userInfo } = useSelector(state => state.userInfo)
+
     const handleSelChap = useCallback(
-        (val) => () => {
-            console.log(val)// val = string
+        (chapid) => () => {
+            // console.log(val)// val = string
             // navigate to "/novel/:novelId/:chapId"
+            if (ownedChap(chapid) <= 0) {
+                navigate(`/novel/${id}/paychapter/${chapid}`)
+            }
+            else {
+                alert("YOU CAN READ THIS")
+            }
         },
-        [],
+        [navigate, id],
     )
 
     function handleFav(e) {
         setFavChecked(e.currentTarget.checked)
     }
 
-    const getNovel = () => {
-        api.get(`/api/novels/${id}`).then((response) => setNovel(response.data));
+    // function amIhaveThisChapter(novelid) {
+    //     var item = userInfo.ownChap.find(nov => nov.chapId === novelid)
+    //     return item ? item : false
+    // }
+
+    function renderChapterStatus(diffTime) {
+        if (diffTime < 0) {
+            return (<Badge bg="warning" pill>หมดอายุการเช่า</Badge>)
+        } else if (diffTime === 0) {
+            return (<Badge bg="danger" pill>ยังไม่เป็นเจ้าของ</Badge>)
+        } else {
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            return <Badge bg="secondary" pill>เช่าแล้ว เวลาที่เหลือ {diffDays} วัน</Badge>
+        }
+    }
+
+    function ownedChap(chapterID) {
+        if (userInfo.ownChap.find(({ chapId }) => chapId === chapterID) === undefined) {
+            return 0
+        } else {
+            const exp = userInfo.ownChap.find(({ chapId }) => chapId === chapterID).expDate
+            var strexp = exp.split("T")[0]
+            strexp = strexp.split("-")
+            const truthexpdate = new Date(`${strexp[1]}/${strexp[2]}/${strexp[0]}`);
+            const timenow = Date.now()
+            const diffTime = (truthexpdate - timenow);
+            return diffTime
+        }
+    }
+
+    async function getNovel() {
+        await api.get(`/api/novels/${id}`).then((response) => setNovel(response.data));
     }
 
     useEffect(() => {
@@ -81,8 +121,11 @@ export default function NovelScreen() {
                     <Col sm={9}>
                         <ListGroup defaultActiveKey="#link1">
                             {novel.allChapter?.map((chap, index) => {
-                                return <ListGroup.Item action onClick={handleSelChap(chap.chapter)} className="d-flex justify-content-between align-items-start">
+                                return <ListGroup.Item action onClick={handleSelChap(chap._id)} className="d-flex justify-content-between align-items-start" key={index}>
                                     <div className="ms-2 me-auto">{index + 1}. {chap.name}</div>
+                                    {
+                                        renderChapterStatus(ownedChap(chap._id))
+                                    }
                                     <Badge bg="primary" pill>{chap.viewers} views</Badge>
                                 </ListGroup.Item>
                             })}

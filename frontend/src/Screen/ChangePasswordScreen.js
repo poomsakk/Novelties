@@ -8,7 +8,6 @@ export default function ChangePasswordScreen() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-
     }
 
     return (
@@ -17,13 +16,10 @@ export default function ChangePasswordScreen() {
                 <h1>Change your password</h1>
                 <br></br>
                 <Form onSubmit={handleSubmit}>
-
                     <Form.Group className="mb-3" controlId="formBasicpassword">
                         <Form.Label>password</Form.Label>
                         <Form.Control value={password} type="password" placeholder="Enter password" onChange={(e) => setPassword(e.target.value)} />
-
                     </Form.Group>
-
                     <Form.Group className="mb-3" controlId="formBasicNewfirmpasswordPassword">
                         <Form.Label>New password</Form.Label>
                         <Form.Control value={newpassword} type="newpassword" placeholder="Enter new password" onChange={(e) => setNewPassword(e.target.value)} />

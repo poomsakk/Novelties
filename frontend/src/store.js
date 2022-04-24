@@ -6,7 +6,7 @@ import { userInfoReducer } from './reducer/userReducer';
 const userInfo = JSON.parse(localStorage.getItem("userInfo")) || 0;
 
 const initialState = {
-    userInfo: { userInfo },
+    userInfo: { userInfo }
 };
 
 const reducer = combineReducers({
