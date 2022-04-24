@@ -1,7 +1,7 @@
 import { Container, ToggleButton, Row, Col, ListGroup, Badge } from 'react-bootstrap';
 import { useCallback, useState } from 'react';
 import data from "../sampleData.js";
-import BookCover from '../images/bookCover.jpg'
+import BookCover from '../images/bookCover.jpg';
 
 export default function ChapterSelScreen() {
     const novel = data.Novel[0]
@@ -11,6 +11,7 @@ export default function ChapterSelScreen() {
         (val) => () => {
             console.log(val)// val = string
             // navigate to "/novel/:novelId/:chapId"
+            window.location.href = "/novel/:novelId/paychapter/:"+val
         },
         [],
     )
