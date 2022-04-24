@@ -26,7 +26,7 @@ export default function NovelScreen() {
                 alert("YOU CAN READ THIS")
             }
         },
-        [navigate, id],
+        [navigate, id]
     )
 
     function handleFav(e) {
@@ -43,7 +43,10 @@ export default function NovelScreen() {
             return (<Badge bg="warning" pill>หมดอายุการเช่า</Badge>)
         } else if (diffTime === 0) {
             return (<Badge bg="danger" pill>ยังไม่เป็นเจ้าของ</Badge>)
-        } else {
+        } else if (diffTime === 999999999) {
+            return (<Badge bg="success" pill>คุณเป็นเจ้าของตอนนี้แล้ว</Badge>)
+        }
+        else {
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
             return <Badge bg="secondary" pill>เช่าแล้ว เวลาที่เหลือ {diffDays} วัน</Badge>
         }
@@ -58,6 +61,10 @@ export default function NovelScreen() {
             strexp = strexp.split("-")
             const truthexpdate = new Date(`${strexp[1]}/${strexp[2]}/${strexp[0]}`);
             const timenow = Date.now()
+            const time1970 = new Date(0)
+            if (truthexpdate - time1970 + 25200000 === 0) {
+                return 999999999
+            }
             const diffTime = (truthexpdate - timenow);
             return diffTime
         }

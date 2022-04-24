@@ -75,26 +75,32 @@ userRouter.post('/addFav', async (req, res) => {
     }
 });
 
-userRouter.post('/addNov', async (req, res) => {
-    const userr = await User.findById(req.body.userid)
-    if (userr) {
-        try {
-            const currentTimeAsMs = Date.now();
-            const adjustedTimeAsMs = currentTimeAsMs + (1000 * 60 * 60 * 24 * 30);
-            const exp = new Date(adjustedTimeAsMs);
-            const novel = {
-                chapId: req.body.chapid,
-                expDate: exp
-            }
-            userr.ownChap.push(novel)
-            await userr.save()
-            res.send({ message: "OK" })
-        } catch (err) {
-            res.send({ err })
-        }
-    } else {
-        res.send({ message: "User Not Found" })
-    }
-});
+// userRouter.post('/addNov', async (req, res) => {
+//     const userr = await User.findById(req.body.userid)
+//     if (userr) {
+//         try {
+//             var exp = Date.now()
+//             if (req.body.buytype === "RENT") {
+//                 const currentTimeAsMs = Date.now();
+//                 const adjustedTimeAsMs = currentTimeAsMs + (1000 * 60 * 60 * 24 * 30);
+//                 var exp = new Date(adjustedTimeAsMs);
+//             }
+//             if (req.body.buytype === "BUY") {
+//                 var exp = new Date(0);
+//             }
+//             const novel = {
+//                 chapId: req.body.chapid,
+//                 expDate: exp
+//             }
+//             userr.ownChap.push(novel)
+//             await userr.save()
+//             res.send({ message: "OK" })
+//         } catch (err) {
+//             res.send({ err })
+//         }
+//     } else {
+//         res.send({ message: "User Not Found" })
+//     }
+// });
 
 export default userRouter;

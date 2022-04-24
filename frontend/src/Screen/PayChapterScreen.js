@@ -1,26 +1,82 @@
 import { Container, Col, Row, Button, Modal, Figure } from "react-bootstrap";
-import { useState } from "react";
-import data from "../sampleData.js";
+import { useEffect, useState } from "react";
 import BookCover from '../images/bookCover.jpg';
+import { useNavigate, useParams } from "react-router-dom";
+import { isLogin } from "../auth.js";
+import Swal from 'sweetalert2';
+import { api } from "../api.js";
+import { useDispatch, useSelector } from "react-redux";
+import { changeUserInfo } from "../action/userAction.js";
 
 export default function PayChapterScreen() {
-    const novel = data.Novel[0]
+    const { id } = useParams()
+    const { chapid } = useParams()
+    const [novel, setNovel] = useState({})
+    const navigate = useNavigate()
+    const { userInfo } = useSelector(state => state.userInfo)
+    const dispatch = useDispatch();
+
+    //modals
     const [show, setShow] = useState(false);
     const [show2, setShow2] = useState(false);
-
     const handleClose = () => setShow(false);
     const handleClose2 = () => setShow2(false);
-
     const handleShow = () => setShow(true);
     const handleShow2 = () => setShow2(true);
 
-    function handleRent() {
-        console.log("RENT")
+    const userid = userInfo._id
+    var buytype = null
+    var price = 20
+    const novelid = id
+
+    async function handleRent() {
+        buytype = "RENT"
+        price = novel.allChapter?.find(x => x._id === chapid).price
+        if (userInfo.coin < price) {
+            return Swal.fire('เงินของคุณไม่เพียงพอ', "", "warning")
+        }
+        const { data } = await api.post("/api/order/buychapter", { userid, chapid, buytype, price, novelid });
+        if (data.message === "OK") {
+            localStorage.clear()
+            localStorage.setItem("userInfo", JSON.stringify(data))
+            dispatch(changeUserInfo(data))
+            navigate("/novel/" + id)
+            Swal.fire('การชำระเงินเสร็จสิ้น', `เช่า/ซื้อตอนเรียบร้อย`, 'success')
+        } else {
+            Swal.fire('การชำระล้มเหลว', data.message, "warning")
+        }
     }
 
-    function handleBuy() {
-        console.log("BUY")
+    async function handleBuy() {
+        buytype = "BUY"
+        price = novel.allChapter?.find(x => x._id === chapid).price
+        if (userInfo.coin < price) {
+            return Swal.fire('เงินของคุณไม่เพียงพอ', "", "warning")
+        }
+        const { data } = await api.post("/api/order/buychapter", { userid, chapid, buytype, price, novelid });
+        if (data.message === "OK") {
+            localStorage.clear()
+            localStorage.setItem("userInfo", JSON.stringify(data))
+            dispatch(changeUserInfo(data))
+            navigate("/novel/" + id)
+            Swal.fire('การชำระเงินเสร็จสิ้น', `เช่า/ซื้อตอนเรียบร้อย`, 'success')
+        } else {
+            Swal.fire('การชำระล้มเหลว', data.message, "warning")
+        }
     }
+
+    async function getNovel() {
+        await api.get(`/api/novels/${id}`).then((response) => setNovel(response.data));
+    }
+
+    useEffect(() => {
+        if (!isLogin()) {
+            Swal.fire('Need to login first', '', 'info')
+            navigate("/login")
+        }
+        setNovel({})
+        getNovel()
+    }, [navigate])
 
     return (
         <Container>
@@ -37,24 +93,23 @@ export default function PayChapterScreen() {
                 <Col></Col>
             </Row>
             <Col >
-                <h1 className="mt-3 text-left">{'Teaser-' + novel.name + '-' + novel.allChapter[0].name}</h1>
+                <h1 className="mt-3 text-left">{novel.name + " - " + novel.allChapter?.find(x => x._id === chapid).name}</h1>
             </Col>
             <br></br>
             <Row>
+                <h4>เรื่องย่อ</h4>
                 <body className="content-summary">
-                    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-                    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-                    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                    {novel.title}
                 </body>
             </Row>
             <br></br>
             <Row className="text-center">
                 <Col>
-                    <body>{'คุณสามารถอ่าน ' + novel.name + '-' + novel.allChapter[0].name + ' ได้ด้วยการจ่ายเหรียญ'}</body>
+                    <h3>{'คุณสามารถอ่าน ' + novel.name + " - " + novel.allChapter?.find(x => x._id === chapid).name + ' ได้ด้วยการจ่ายเหรียญ'}</h3>
                 </Col>
                 <Col>
                     <Button variant="success" className="me-2" onClick={handleShow}>เช่า</Button>
-                    <Button variant="success" className="me-2" onClick={handleShow2}>ถาวร</Button>
+                    <Button variant="success" className="me-2" onClick={handleShow2}>ซื้อถาวร</Button>
                     <Modal
                         show={show}
                         onHide={handleClose}
@@ -100,3 +155,4 @@ export default function PayChapterScreen() {
 
     );
 }
+//novel.allChapter.find(({ _id }) => _id === chapid).name

@@ -25,7 +25,8 @@ const novelSchema = new mongoose.Schema({
     image: { type: String, required: true },
     allChapter: [chapterSchema],
     writerId: { type: String, required: true },
-    title: { type: String, required: true }
+    title: { type: String, required: true },
+    coinRecieve: { type: Number, required: true, default: 0 }
 }, { timestamps: true });
 
 const novelModel = mongoose.model('Novel', novelSchema);
