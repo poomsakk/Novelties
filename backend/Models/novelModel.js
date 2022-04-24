@@ -23,7 +23,9 @@ const novelSchema = new mongoose.Schema({
     allViewers: { type: Number, required: true, default: 0 },
     rating: ratingSchema,
     image: { type: String, required: true },
-    allChapter: [chapterSchema]
+    allChapter: [chapterSchema],
+    writerId: { type: String, required: true },
+    title: { type: String, required: true }
 }, { timestamps: true });
 
 const novelModel = mongoose.model('Novel', novelSchema);

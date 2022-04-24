@@ -2,10 +2,15 @@ import { Container, ToggleButton, Row, Col, ListGroup, Badge } from 'react-boots
 import BookCover from '../images/bookCover.jpg'
 import { useCallback, useEffect, useState } from 'react';
 import { api } from '../api';
+import { isLogin } from '../auth';
+import { useNavigate, useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 export default function NovelScreen() {
     const [novel, setNovel] = useState({});
+    const { id } = useParams()
     const [favChecked, setFavChecked] = useState(false);
+    const navigate = useNavigate()
     const handleSelChap = useCallback(
         (val) => () => {
             console.log(val)// val = string
@@ -14,15 +19,22 @@ export default function NovelScreen() {
         [],
     )
 
+    function handleFav(e) {
+        setFavChecked(e.currentTarget.checked)
+    }
+
     const getNovel = () => {
-        return api.get(`/api/novels/625c4dbbe596f77d11948b0e`)
-            .then((response) => setNovel(response.data));
+        api.get(`/api/novels/${id}`).then((response) => setNovel(response.data));
     }
 
     useEffect(() => {
+        if (!isLogin()) {
+            Swal.fire('Need to login first', '', 'info')
+            navigate("/login")
+        }
         setNovel({})
         getNovel()
-    }, [])
+    }, [navigate])
 
     return (
         <>
@@ -50,7 +62,7 @@ export default function NovelScreen() {
                             variant="outline-success"
                             checked={favChecked}
                             value="1"
-                            onChange={(e) => setFavChecked(e.currentTarget.checked)}
+                            onChange={handleFav}
                         >
                             {favChecked ? "Remove from my favorite" : "add to my favorite"}
                         </ToggleButton>

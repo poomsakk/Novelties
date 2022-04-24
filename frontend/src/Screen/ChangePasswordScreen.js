@@ -1,17 +1,14 @@
 import { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
+import { Form } from 'react-bootstrap';
 
 export default function ChangePasswordScreen() {
     const [password, setPassword] = useState("")
     const [newpassword, setNewPassword] = useState("")
     const [confirmpassword, setConfirmPassword] = useState("")
-    const navigate = useNavigate();
 
     async function handleSubmit(e) {
         e.preventDefault();
-        
+
     }
 
     return (
@@ -46,7 +43,7 @@ export default function ChangePasswordScreen() {
                     <div className="d-grid gap-2">
                         <button class="btn btn-primary" type="Submit">CONFIRM</button>
                     </div>
-                    
+
                 </Form>
             </div>
         </>

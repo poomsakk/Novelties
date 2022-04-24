@@ -1,24 +1,25 @@
 import express from 'express';
-import User from '../Models/userModel.js';
+import Writer from '../Models/writerModel.js';
+import Novel from "../Models/novelModel.js"
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-const userRouter = express.Router();
+const writerRouter = express.Router();
 
 const generatePassword = async (password) => {
     const passwordHashed = await bcrypt.hashSync(password, 10);
     return passwordHashed;
 }
 
-userRouter.post('/register', async (req, res) => {
-    const user = new User({
+writerRouter.post('/register', async (req, res) => {
+    const user = new Writer({
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
     });
     try {
         //check is this email have in DB
-        const userCheck = await User.findOne({ email: user.email });
+        const userCheck = await Writer.findOne({ email: user.email });
         if (userCheck) {
             return res.json({ message: "THIS EMAIL ALREADY EXIST" });
         }
@@ -29,11 +30,10 @@ userRouter.post('/register', async (req, res) => {
     } catch (err) {
         res.json({ message: err });
     }
-
 });
 
-userRouter.post('/login', async (req, res) => {
-    const user = await User.findOne({
+writerRouter.post('/login', async (req, res) => {
+    const user = await Writer.findOne({
         email: req.body.email,
     });
     if (user) {
@@ -44,36 +44,21 @@ userRouter.post('/login', async (req, res) => {
                 _id: user.id,
                 name: user.name,
                 email: user.email,
-                isAdmin: user.isAdmin,
-                favorite: user.favorite,
                 ownNovel: user.ownNovel,
-                coin: user.coin,
-                rating: user.rating,
                 token: jwt.sign({ name: user.name, email: user.email, id: user._id }, "Secret", { expiresIn: "2d" })
             });
         }
         else {
             return res.status(401).json({ message: 'Please check your username and password' });
         }
-
     } else {
         res.status(401).json({ message: 'Please check your username and password' });
     }
 });
 
-userRouter.post('/addFav', async (req, res) => {
-    const userr = await User.findById(req.body.userid)
-    if (userr) {
-        const newFav = {
-            novelId: req.body.novelid,
-            name: req.body.novelname
-        }
-        userr.favorite.push(newFav)
-        await userr.save()
-        res.send({ message: "OK" })
-    } else {
-        res.send({ message: "User Not Found" })
-    }
+writerRouter.post('/getnovel', async (req, res) => {
+    const novels = await Novel.find({ writerId: req.body.writerid })
+    res.json({ data: novels });
 });
 
-export default userRouter;
+export default writerRouter;

@@ -1,4 +1,5 @@
 import Novel from "../Models/novelModel.js"
+import Writer from "../Models/writerModel.js"
 import express from "express";
 
 const novelRouter = express.Router();
@@ -15,15 +16,23 @@ const novelRouter = express.Router();
 
 novelRouter.post('/addNovel', async (req, res) => {
     const novel = new Novel({
-        name: req.body.name,
+        name: req.body.novelName,
         category: req.body.category,
         image: req.body.image,
+        writerId: req.body.writerid,
+        title: req.body.title
     });
     try {
+        //save novel
         const create = await novel.save();
+        //add novel in writer collections
+        const writer = await Writer.findById(req.body.writerid)
+        const novell = { novelId: String(create._id) }
+        writer.ownNovel.push(novell)
+        await writer.save()
         create ? res.json({ message: "OK" }) : res.json({ message: "CREATE FAIL" });
     } catch (err) {
-        res.json({ message: err });
+        res.send({ err });
     }
 });
 

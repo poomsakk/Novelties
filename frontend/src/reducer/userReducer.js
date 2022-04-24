@@ -1,13 +1,24 @@
-const initialState = {
-    username: null,
-}
+// const initialState = {
+//     username: null,
+// }
 
-export function userReducer(state = initialState, action) {
+// export function userReducer(state = initialState, action) {
+//     switch (action.type) {
+//         case "CHANGE_USERNAME":
+//             return {
+//                 ...state,
+//                 username: action.payload,
+//             }
+//         default:
+//             return state
+//     }
+// }
+
+export function userInfoReducer(state = {}, action) {
     switch (action.type) {
-        case "CHANGE_USERNAME":
+        case "CHANGE_USERINFO":
             return {
-                ...state,
-                username: action.payload,
+                userInfo: action.payload
             }
         default:
             return state

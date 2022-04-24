@@ -4,6 +4,7 @@ import BookCover from '../images/bookCover.jpg'
 import { useCallback, useEffect, useState } from 'react';
 import { api } from '../api';
 import { useNavigate } from 'react-router-dom';
+import { isWriter } from '../auth';
 
 export default function HomeScreenContent() {
     const [novels, setNovels] = useState([]);
@@ -23,9 +24,12 @@ export default function HomeScreenContent() {
     )
 
     useEffect(() => {
+        if (isWriter()) {
+            navigate("/writer/dashboard")
+        }
         setNovels([])
         getNovel()
-    }, [])
+    }, [navigate])
 
     return (<>
         <Carousel>
@@ -46,7 +50,6 @@ export default function HomeScreenContent() {
                     src={Gray}
                     alt="Second slide"
                 />
-
                 <Carousel.Caption>
                     <h3>Second slide label</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -58,7 +61,6 @@ export default function HomeScreenContent() {
                     src={Gray}
                     alt="Third slide"
                 />
-
                 <Carousel.Caption>
                     <h3>Third slide label</h3>
                     <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>

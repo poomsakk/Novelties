@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import { changeUserInfo } from '../action/userAction';
 import { useDispatch } from "react-redux"
 
-export default function LoginScreen() {
+export default function WriterLoginScreen() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate();
@@ -13,7 +13,7 @@ export default function LoginScreen() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        const response = await fetch('http://localhost:5000/api/users/login', {
+        const response = await fetch('http://localhost:5000/api/writer/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -26,12 +26,13 @@ export default function LoginScreen() {
         const data = await response.json()
         if (data.message === "OK") {
             localStorage.setItem("userInfo", JSON.stringify(data))
+            localStorage.setItem("writer", "LOGGEDIN")
             //console.log(JSON.parse(localStorage.getItem("userInfo")))
             //localStorage.setItem('userName', data.name)
             // dispatch(changeUserName(data.name))
             dispatch(changeUserInfo(data))
             Swal.fire('Login Successful', '', 'success')
-            navigate('/');
+            navigate('/writer/dashboard');
         } else {
             Swal.fire('Login Fail!!', data.message, "warning")
         }
@@ -40,7 +41,7 @@ export default function LoginScreen() {
     return (
         <>
             <div className='form-layout'>
-                <h1>Log in</h1>
+                <h1>Writer Login</h1>
                 <br></br>
                 <Form onSubmit={handleSubmit}>
 
