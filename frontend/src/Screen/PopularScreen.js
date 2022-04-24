@@ -1,7 +1,7 @@
 import { Card,Container,ListGroup,Badge,Col,Row, CardGroup,Button } from 'react-bootstrap';
 import data from "../sampleData.js";
 import React from 'react';
-
+import bookCover from "../images/bookCover.jpg"
 
 
 export default function PopularScreen() {
@@ -11,19 +11,22 @@ export default function PopularScreen() {
     
     return (
         <>
-            <h1>Popular Novels</h1>
+        <Container>    
+        <h1>Popular Novels</h1>
             {/* <Button variant="danger" onClick={handle}>del</Button> */}
             <br></br>
-        
-        <Container>    
                 {novels.map((novel) => {
                     // novel.allViewers.sort()
-                    return <CardGroup>
+                    return <Row>
+                    <CardGroup>
+                    <Col sm={2}>
                     <Card>
                         <Card.Body>
-                            <Card.Img variant="top" src={novel.image}/>
+                            <Card.Img variant="top" src={bookCover}/>
                         </Card.Body>
                     </Card>
+                    </Col>
+                    <Col>
                     <Card>
                         <Card.Body>
                         <Card.Title style={{fontSize : 24}}>{novel.name}</Card.Title>
@@ -41,13 +44,12 @@ export default function PopularScreen() {
                         </ListGroup>
                         </Card.Body>
                     </Card>
+                    </Col>
                     </CardGroup>
-                {/* </Card> */}
+                    </Row>
+                    
+                // {/* </Card> */}
                 })}
-
-           
-            <br /><br /><br /><br />
-        
         </Container>    
         </>
     )

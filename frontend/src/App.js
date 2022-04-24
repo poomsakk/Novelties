@@ -9,6 +9,7 @@ import FavoriteScreen from './Screen/FavoriteScreen';
 import ChapterSelScreen from './Screen/ChapterSelScreen';
 import NovelScreen from './Screen/NovelScreen';
 import PopularScreen from './Screen/PopularScreen';
+import SearchScreen from './Screen/SearchScreen';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path='/ChapterSel' element={<ChapterSelScreen></ChapterSelScreen>}></Route>
           <Route path="/novel/:id" element={<NovelScreen></NovelScreen>} />
           <Route path='/popular' element={<PopularScreen></PopularScreen>}></Route>
+          <Route path='/search' element={<SearchScreen></SearchScreen>}></Route>
         </Routes>
       </main>
     </>
