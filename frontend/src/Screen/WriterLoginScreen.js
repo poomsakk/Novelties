@@ -66,7 +66,7 @@ export default function WriterLoginScreen() {
                     <br></br>
                     <br></br>
                     <Form.Group className="d-grid gap-2 d-md-flex justify-content-center" controlId="formBasicPassword">
-                        <p>Don't have an account <a href='/register'>Create account</a></p>
+                        <p>Don't have an account <a href='/writer/register'>Create writer account</a></p>
                     </Form.Group>
                 </Form>
             </div>

@@ -16,9 +16,19 @@ export function isWriter() {
     }
 }
 
+export function isOwnThisChap(chapid) {
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"))
+    if (userInfo.ownChap?.find((chap) => chap.chapId === chapid) === undefined) {
+        return false
+    } else {
+        return true
+    }
+}
+
 const auth = {
     isLogin,
     isWriter,
+    isOwnThisChap
 };
 
 export default auth;

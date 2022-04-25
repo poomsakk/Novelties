@@ -31,6 +31,7 @@ export default function NavbarScreen() {
                             </>)
                     }
                     {userInfo && !isWriter() ? (<Nav.Link href="/topup"> Coin: {userInfo.coin}</Nav.Link>) : null}
+                    {!userInfo && !isWriter() ? <Nav.Link href="/writer/login">Creater?</Nav.Link> : null}
                 </Nav>
                 <Navbar.Toggle />
                 <Nav onSelect={handleSelect}>
@@ -43,14 +44,25 @@ export default function NavbarScreen() {
                                             Signed in as:
                                         </Navbar.Text>
                                         <NavDropdown title={userInfo.name} id="nav-dropdown">
+                                            <NavDropdown.Item eventKey="edit">Edit profile</NavDropdown.Item>
+                                            {
+                                                isWriter() ? null :
+                                                    <>
+                                                        <NavDropdown.Item eventKey="topup">Topup history</NavDropdown.Item>
+                                                        <NavDropdown.Item eventKey="novel">Novel history</NavDropdown.Item>
+                                                    </>
+                                            }
+                                            <NavDropdown.Divider />
                                             <NavDropdown.Item eventKey="logout">Logout</NavDropdown.Item>
                                         </NavDropdown>
                                     </Navbar.Collapse>
                                 ) :
-                                (
+                                (<>
                                     <Navbar.Text>
                                         <h5><a href="/login">Log in</a></h5>
                                     </Navbar.Text>
+
+                                </>
                                 )
                         }
 

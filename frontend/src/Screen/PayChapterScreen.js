@@ -33,7 +33,9 @@ export default function PayChapterScreen() {
         buytype = "RENT"
         price = novel.allChapter?.find(x => x._id === chapid).price
         if (userInfo.coin < price) {
-            return Swal.fire('เงินของคุณไม่เพียงพอ', "", "warning")
+            navigate("/topup")
+            Swal.fire('เงินของคุณไม่เพียงพอ', "", "warning")
+            return
         }
         const { data } = await api.post("/api/order/buychapter", { userid, chapid, buytype, price, novelid });
         if (data.message === "OK") {
@@ -51,7 +53,9 @@ export default function PayChapterScreen() {
         buytype = "BUY"
         price = novel.allChapter?.find(x => x._id === chapid).price
         if (userInfo.coin < price) {
-            return Swal.fire('เงินของคุณไม่เพียงพอ', "", "warning")
+            navigate("/topup")
+            Swal.fire('เงินของคุณไม่เพียงพอ', "", "warning")
+            return
         }
         const { data } = await api.post("/api/order/buychapter", { userid, chapid, buytype, price, novelid });
         if (data.message === "OK") {
@@ -105,7 +109,8 @@ export default function PayChapterScreen() {
             <br></br>
             <Row className="text-center">
                 <Col>
-                    <h3>{'คุณสามารถอ่าน ' + novel.name + " - " + novel.allChapter?.find(x => x._id === chapid).name + ' ได้ด้วยการจ่ายเหรียญ'}</h3>
+                    <h4>{'คุณสามารถอ่าน ' + novel.name + " - " + novel.allChapter?.find(x => x._id === chapid).name + ' ได้ด้วยการจ่ายเหรียญ'}</h4>
+
                 </Col>
                 <Col>
                     <Button variant="success" className="me-2" onClick={handleShow}>เช่า</Button>
@@ -120,7 +125,8 @@ export default function PayChapterScreen() {
                             <Modal.Title>แลกซื้อตอนเช่า</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            สามารถอ่านได้ภายใน 30 วันสำหรับการเช่า
+                            <p>สามารถอ่านได้ภายใน 30 วันสำหรับการเช่า</p>
+                            <p>ยอดชำระ 20 coin</p>
                         </Modal.Body>
                         <Modal.Footer>
                             <Button variant="secondary" onClick={handleClose}>
@@ -136,10 +142,11 @@ export default function PayChapterScreen() {
                         keyboard={false}
                     >
                         <Modal.Header closeButton>
-                            <Modal.Title>ซื้อถาวร</Modal.Title>
+                            <Modal.Title>ซื้อตอนถาวร</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            เป็นการซื้อแบบถาวร
+                            <p>เป็นการซื้อแบบถาวร</p>
+                            <p>ยอดชำระ 20 coin</p>
                         </Modal.Body>
                         <Modal.Footer>
                             <Button variant="secondary" onClick={handleClose2}>
@@ -150,9 +157,17 @@ export default function PayChapterScreen() {
                     </Modal>
                 </Col>
             </Row>
+            <br></br>
+            <h4>เช่า 20 coin สามารถอ่านได้ 30 วัน</h4>
+            <h4>ซื้อ 20 coin ถาวร</h4>
         </Container>
 
 
     );
 }
 //novel.allChapter.find(({ _id }) => _id === chapid).name
+
+{/* <Button variant="secondary" onClick={handleClose2}>
+ปิด
+</Button>
+<Button variant="primary" onClick={handleBuy}>ซื้อถาวร</Button> */}

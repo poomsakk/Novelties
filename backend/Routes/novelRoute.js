@@ -54,4 +54,25 @@ novelRouter.post('/:id/addChapter', async (req, res) => {
     }
 });
 
+novelRouter.post('/:id/getchapter/:chapid', async (req, res) => {
+    const novel = await Novel.findById(req.params.id)
+    if (novel) {
+        const chap = novel.allChapter.find((chap) => chap._id.toString() === req.params.chapid)
+        if (chap === undefined) {
+            res.send({ message: "Chapter Not Found" })
+        } else {
+            res.send({
+                message: "OK",
+                chapter: chap.chapter,
+                name: chap.name,
+                detail: chap.detail,
+                price: chap.price,
+                viewers: chap.viewers
+            })
+        }
+    } else {
+        res.send({ message: "Novel Not Found" })
+    }
+})
+
 export default novelRouter;

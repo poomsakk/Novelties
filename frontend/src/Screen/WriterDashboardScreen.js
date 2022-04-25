@@ -87,7 +87,7 @@ export default function WriterDashboardScreen() {
                     <tr>
                         <th>#</th>
                         <th>Novel Name</th>
-                        <th>All coin</th>
+                        <th>All coin recieve</th>
                         <th>Salary recieve</th>
                         <th>Comment</th>
                         <th>Latest Chapter</th>
@@ -100,7 +100,7 @@ export default function WriterDashboardScreen() {
                             return <tr key={idx}>
                                 <td>{idx + 1}</td>
                                 <td>{novel.name}</td>
-                                <td>xxxxxx</td>
+                                <td>{novel.coinRecieve}</td>
                                 <td>xxxxxxx</td>
                                 <td>xxxxxx</td>
                                 <td>{novel.allChapter.length}</td>

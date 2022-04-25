@@ -23,7 +23,7 @@ export default function NovelScreen() {
                 navigate(`/novel/${id}/paychapter/${chapid}`)
             }
             else {
-                alert("YOU CAN READ THIS")
+                navigate(`/novel/${id}/read/${chapid}`)
             }
         },
         [navigate, id]

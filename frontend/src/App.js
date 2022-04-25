@@ -16,6 +16,7 @@ import AddChapterScreen from './Screen/AddChapterScreen';
 import PopularScreen from './Screen/PopularScreen';
 import TopupScreen from './Screen/TopupScreen';
 import PayChapterScreen from './Screen/PayChapterScreen';
+import ReadScreen from './Screen/ReadScreen';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path='/popular' element={<PopularScreen></PopularScreen>}></Route>
           <Route path='/topup' element={<TopupScreen></TopupScreen>}></Route>
           <Route path="/novel/:id/paychapter/:chapid" element={<PayChapterScreen></PayChapterScreen>}></Route>
+          <Route path="/novel/:id/read/:chapid" element={<ReadScreen></ReadScreen>}></Route>
         </Routes>
       </main>
     </>
