@@ -1,20 +1,16 @@
 import { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
-import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
-import data from "../sampleData.js";
+import { Form } from 'react-bootstrap';
 
-export default function ForgetPasswordScreen(){
+export default function ForgetPasswordScreen() {
     /*const [password, ForgetPassword] = useState("")*/
     const [email, setEmail] = useState("")
-    const navigate = useNavigate();
 
     async function handleSubmit(e) {
         e.preventDefault();
-        
+
     }
-    
-    return(
+
+    return (
         <>
             <div className='form-layout'>
                 <h1>Reset your password</h1>

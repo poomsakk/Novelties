@@ -4,9 +4,11 @@ import bodyParser from "body-parser";
 import dotenv from 'dotenv';
 import userRouter from "./Routes/userRoute.js";
 import novelRouter from "./Routes/novelRoute.js";
+import writerRouter from "./Routes/writerRoute.js";
 import mongoose from "mongoose";
 import cors from 'cors';
 import Novel from "./Models/novelModel.js"
+import orderRouter from "./Routes/orderRoute.js";
 dotenv.config();
 
 const app = express();
@@ -22,6 +24,8 @@ app.use(cors())
 //route
 app.use('/api/users', userRouter);
 app.use('/api/novels', novelRouter);
+app.use('/api/writer', writerRouter);
+app.use('/api/order', orderRouter);
 app.get('/api/novels', async (req, res) => {
     const novels = await Novel.find({})
     res.send(novels);

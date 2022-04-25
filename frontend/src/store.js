@@ -1,16 +1,16 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import { userReducer } from './reducer/userReducer';
+import { userInfoReducer } from './reducer/userReducer';
 
 
-//const userInfo = localStorage.getItem("userInfo") || null;
+const userInfo = JSON.parse(localStorage.getItem("userInfo")) || 0;
 
 const initialState = {
-    //user: { userInfo },
+    userInfo: { userInfo }
 };
 
 const reducer = combineReducers({
-    user: userReducer,
+    userInfo: userInfoReducer
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

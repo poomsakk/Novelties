@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 
 const ratingSchema = {
-    allScore: { type: Number, require: true, default: 0 },
-    count: { type: Number, require: true, default: 0 }
+    allScore: { type: Number, require: true, default: 10 },
+    count: { type: Number, require: true, default: 1 }
 }
 
 const categorySchema = new mongoose.Schema({
@@ -20,10 +20,13 @@ const chapterSchema = new mongoose.Schema({
 const novelSchema = new mongoose.Schema({
     name: { type: String, required: true },
     category: [categorySchema],
-    allViewers: { type: Number, required: true, default: 0 },
+    allViewers: { type: Number, required: true, default: 9999 },
     rating: ratingSchema,
     image: { type: String, required: true },
-    allChapter: [chapterSchema]
+    allChapter: [chapterSchema],
+    writerId: { type: String, required: true },
+    title: { type: String, required: true },
+    coinRecieve: { type: Number, required: true, default: 0 }
 }, { timestamps: true });
 
 const novelModel = mongoose.model('Novel', novelSchema);

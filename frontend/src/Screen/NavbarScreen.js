@@ -1,66 +1,69 @@
-import { useState, useEffect } from 'react';
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from 'react-router-dom';
-import { changeUserName } from '../action/userAction';
+import { changeUserInfo } from '../action/userAction';
+import { isWriter } from '../auth';
 export default function NavbarScreen() {
-    const [userdata, setUserdata] = useState()
-    const { username } = useSelector(state => state.user)
+    const { userInfo } = useSelector(state => state.userInfo)
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+
     const handleSelect = (eventKey) => {
         if (eventKey === "logout") {
-            dispatch(changeUserName(null))
-            localStorage.removeItem("userName")
-            setUserdata(null)
+            dispatch(changeUserInfo(0))
+            localStorage.clear()
             navigate('/')
         }
     }
-
-    useEffect(() => {
-        setUserdata(localStorage.getItem("userName"))
-    }, []);
 
     return (<>
         <Navbar expand="lg" className='bg-color' variant="light" >
             <Container>
                 <Navbar.Brand href="/"><h1 className='logo-font'>NOVELTIES</h1></Navbar.Brand>
                 <Nav className="me-auto">
-                    <Nav.Link href="/">Home</Nav.Link>
-                    <Nav.Link href="/Popular">Popular</Nav.Link>
-                    <Nav.Link href="/Favorite">Favorite</Nav.Link>
+                    {
+                        isWriter() ? null :
+                            (<>
+                                <Nav.Link href="/">Home</Nav.Link>
+                                <Nav.Link href="/Popular">Popular</Nav.Link>
+                                <Nav.Link href="/Favorite">Favorite</Nav.Link>
+                            </>)
+                    }
+                    {userInfo && !isWriter() ? (<Nav.Link href="/topup"> Coin: {userInfo.coin}</Nav.Link>) : null}
+                    {!userInfo && !isWriter() ? <Nav.Link href="/writer/login">Creater?</Nav.Link> : null}
                 </Nav>
                 <Navbar.Toggle />
                 <Nav onSelect={handleSelect}>
                     <Navbar.Collapse className="justify-content-end">
                         {
-                            username ?
+                            userInfo.name ?
                                 (
                                     <Navbar.Collapse className="justify-content-end">
                                         <Navbar.Text>
                                             Signed in as:
                                         </Navbar.Text>
-                                        <NavDropdown title={username} id="nav-dropdown">
+                                        <NavDropdown title={userInfo.name} id="nav-dropdown">
+                                            <NavDropdown.Item eventKey="edit">Edit profile</NavDropdown.Item>
+                                            {
+                                                isWriter() ? null :
+                                                    <>
+                                                        <NavDropdown.Item eventKey="topup">Topup history</NavDropdown.Item>
+                                                        <NavDropdown.Item eventKey="novel">Novel history</NavDropdown.Item>
+                                                    </>
+                                            }
+                                            <NavDropdown.Divider />
                                             <NavDropdown.Item eventKey="logout">Logout</NavDropdown.Item>
                                         </NavDropdown>
                                     </Navbar.Collapse>
-                                ) : userdata ?
-                                    (
-                                        <Navbar.Collapse className="justify-content-end">
-                                            <Navbar.Text>
-                                                Signed in as:
-                                            </Navbar.Text>
-                                            <NavDropdown title={userdata} id="nav-dropdown">
-                                                <NavDropdown.Item eventKey="logout">Logout</NavDropdown.Item>
-                                            </NavDropdown>
-                                        </Navbar.Collapse>
-                                    ) :
-                                    (
-                                        <Navbar.Text>
-                                            <h5><a href="/login">Log in</a></h5>
-                                        </Navbar.Text>
-                                    )
+                                ) :
+                                (<>
+                                    <Navbar.Text>
+                                        <h5><a href="/login">Log in</a></h5>
+                                    </Navbar.Text>
+
+                                </>
+                                )
                         }
 
                     </Navbar.Collapse>

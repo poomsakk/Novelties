@@ -29,7 +29,6 @@ userRouter.post('/register', async (req, res) => {
     } catch (err) {
         res.json({ message: err });
     }
-
 });
 
 userRouter.post('/login', async (req, res) => {
@@ -45,6 +44,10 @@ userRouter.post('/login', async (req, res) => {
                 name: user.name,
                 email: user.email,
                 isAdmin: user.isAdmin,
+                favorite: user.favorite,
+                ownChap: user.ownChap,
+                coin: user.coin,
+                rating: user.rating,
                 token: jwt.sign({ name: user.name, email: user.email, id: user._id }, "Secret", { expiresIn: "2d" })
             });
         }
@@ -56,5 +59,48 @@ userRouter.post('/login', async (req, res) => {
         res.status(401).json({ message: 'Please check your username and password' });
     }
 });
+
+userRouter.post('/addFav', async (req, res) => {
+    const userr = await User.findById(req.body.userid)
+    if (userr) {
+        const newFav = {
+            novelId: req.body.novelid,
+            name: req.body.novelname
+        }
+        userr.favorite.push(newFav)
+        await userr.save()
+        res.send({ message: "OK" })
+    } else {
+        res.send({ message: "User Not Found" })
+    }
+});
+
+// userRouter.post('/addNov', async (req, res) => {
+//     const userr = await User.findById(req.body.userid)
+//     if (userr) {
+//         try {
+//             var exp = Date.now()
+//             if (req.body.buytype === "RENT") {
+//                 const currentTimeAsMs = Date.now();
+//                 const adjustedTimeAsMs = currentTimeAsMs + (1000 * 60 * 60 * 24 * 30);
+//                 var exp = new Date(adjustedTimeAsMs);
+//             }
+//             if (req.body.buytype === "BUY") {
+//                 var exp = new Date(0);
+//             }
+//             const novel = {
+//                 chapId: req.body.chapid,
+//                 expDate: exp
+//             }
+//             userr.ownChap.push(novel)
+//             await userr.save()
+//             res.send({ message: "OK" })
+//         } catch (err) {
+//             res.send({ err })
+//         }
+//     } else {
+//         res.send({ message: "User Not Found" })
+//     }
+// });
 
 export default userRouter;

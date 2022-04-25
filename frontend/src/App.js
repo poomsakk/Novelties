@@ -9,7 +9,14 @@ import FavoriteScreen from './Screen/FavoriteScreen';
 import ForgetPasswordScreen from './Screen/ForgetPasswordScreen';
 import ChangePasswordScreen from './Screen/ChangePasswordScreen'
 import NovelScreen from './Screen/NovelScreen';
-
+import WriterRegisterScreen from './Screen/WriterRegisterScreen';
+import WriterLoginScreen from './Screen/WriterLoginScreen';
+import WriterDashboardScreen from './Screen/WriterDashboardScreen';
+import AddChapterScreen from './Screen/AddChapterScreen';
+import PopularScreen from './Screen/PopularScreen';
+import TopupScreen from './Screen/TopupScreen';
+import PayChapterScreen from './Screen/PayChapterScreen';
+import ReadScreen from './Screen/ReadScreen';
 
 function App() {
   return (
@@ -25,6 +32,14 @@ function App() {
           <Route path='/forgetpassword' element={<ForgetPasswordScreen></ForgetPasswordScreen>}></Route>
           <Route path='/changepassword' element={<ChangePasswordScreen></ChangePasswordScreen>}></Route>
           <Route path="/novel/:id" element={<NovelScreen></NovelScreen>} />
+          <Route path='/writer/register' element={<WriterRegisterScreen></WriterRegisterScreen>}></Route>
+          <Route path='/writer/login' element={<WriterLoginScreen></WriterLoginScreen>}></Route>
+          <Route path='/writer/dashboard' element={<WriterDashboardScreen></WriterDashboardScreen>}></Route>
+          <Route path='/writer/addchapter/:id' element={<AddChapterScreen></AddChapterScreen>}></Route>
+          <Route path='/popular' element={<PopularScreen></PopularScreen>}></Route>
+          <Route path='/topup' element={<TopupScreen></TopupScreen>}></Route>
+          <Route path="/novel/:id/paychapter/:chapid" element={<PayChapterScreen></PayChapterScreen>}></Route>
+          <Route path="/novel/:id/read/:chapid" element={<ReadScreen></ReadScreen>}></Route>
         </Routes>
       </main>
     </>
