@@ -3,14 +3,13 @@ import {useState} from "react";
 import data from "../sampleData.js";
 import { Card,Container,ListGroup,Badge,Col, CardGroup,Button,Row,Form, FormGroup } from 'react-bootstrap';
 import "../SearchBar.css";
+import bookCover from "../images/bookCover.jpg"
+import SearchIcon from "../images/searchIcon.png"
 
 
 export default function SearchScreen(){
     const novels = data.Novel
     const [searchTerm,setSearchTerm] = useState("")
-    function handle(){
-       
-    }
     return(
         <>
         <Container>
@@ -28,7 +27,9 @@ export default function SearchScreen(){
         />
             </Col>
         <Col sm={2}>
-            <Button>Search</Button>
+            <Button variant="outline-light">
+            <img src={SearchIcon} height={23} width={23}/>
+            </Button>
         </Col>
         </FormGroup>
         <div className="dataResult">
@@ -58,12 +59,16 @@ export default function SearchScreen(){
     <br></br>
                 {novels.map((novel) => {
                     // novel.allViewers.sort()
-                    return <CardGroup>
+                    return <Row>
+                    <CardGroup>
+                    <Col sm={2}>
                     <Card>
                         <Card.Body>
-                            <Card.Img variant="top" src={novel.image}/>
+                            <Card.Img variant="top" src={bookCover}/>
                         </Card.Body>
                     </Card>
+                    </Col>
+                    <Col>
                     <Card>
                         <Card.Body>
                         <Card.Title style={{fontSize : 24}}>{novel.name}</Card.Title>
@@ -81,7 +86,10 @@ export default function SearchScreen(){
                         </ListGroup>
                         </Card.Body>
                     </Card>
+                    </Col>
                     </CardGroup>
+                    </Row>
+                    
                 })}
 
            

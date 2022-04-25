@@ -3,6 +3,8 @@ import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from 'react-router-dom';
 import { changeUserName } from '../action/userAction';
+import "../SearchBar.css";
+import bookCover from "../images/searchIcon.png"
 export default function NavbarScreen() {
     const [userdata, setUserdata] = useState()
     const { username } = useSelector(state => state.user)
@@ -30,9 +32,13 @@ export default function NavbarScreen() {
                     <Nav.Link href="/">Home</Nav.Link>
                     <Nav.Link href="/Popular">Popular</Nav.Link>
                     <Nav.Link href="/Favorite">Favorite</Nav.Link>
+                    <Nav.Link href="/search">
+                        <img src = {bookCover} height={25} width={25}/>
+                    </Nav.Link>
                 </Nav>
                 <Navbar.Toggle />
                 <Nav onSelect={handleSelect}>
+                
                     <Navbar.Collapse className="justify-content-end">
                         {
                             username ?

@@ -138,7 +138,7 @@ const data = {
             category: [{ name: "เกมออนไลน์" },{ name: "adventure" }],
             detail: "ชาง สาวสวยที่สุดแสนจะเบื่อหน่ายกับการถูกตามตื้อให้ไปเป็นนายแบบ!! เธอได้พบกับเกมออนไลน์ที่ชื่อว่า Adventure World Online และได้ลองตัดสินใจเล่นดูเพื่อฆ่าเวลา มาเอาใจช่วยมือใหม่หัดเล่นเกมกันนะ",
             allViewers: 2817090,
-            rating: { allScore: 11408, count: 192 },
+            rating: { allScore: 11408, count: 1392 },
             image: "../images/bookCover.jpg",
             allChapter: [
                 { chapter: "1", name: "chap name1", detail: "dasdsadsadsadas", price: "400", viewers: "201" },

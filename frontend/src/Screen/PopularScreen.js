@@ -47,11 +47,12 @@ export default function PopularScreen() {
                     </Col>
                     </CardGroup>
                     </Row>
-                    
                 // {/* </Card> */}
                 })}
-        </Container>    
+        </Container> 
+        <br /><br /><br /><br />  
         </>
+        
     )
 };
 
