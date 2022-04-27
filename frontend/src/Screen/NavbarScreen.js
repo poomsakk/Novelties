@@ -1,8 +1,9 @@
-import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
+import { Navbar, Container, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from 'react-router-dom';
 import { changeUserInfo } from '../action/userAction';
 import { isWriter } from '../auth';
+
 export default function NavbarScreen() {
     const { userInfo } = useSelector(state => state.userInfo)
     const dispatch = useDispatch();
@@ -33,6 +34,17 @@ export default function NavbarScreen() {
                     {userInfo && !isWriter() ? (<Nav.Link href="/topup"> Coin: {userInfo.coin}</Nav.Link>) : null}
                     {!userInfo && !isWriter() ? <Nav.Link href="/writer/login">Creater?</Nav.Link> : null}
                 </Nav>
+                <div className='span2'>
+                    <Form className="d-flex me-2">
+                    <FormControl
+                        type="search"
+                        placeholder="Search"
+                        className="me-2"
+                        aria-label="Search"
+                        />
+                    <Button variant="outline-success">Search</Button>
+                    </Form>
+                </div>
                 <Navbar.Toggle />
                 <Nav onSelect={handleSelect}>
                     <Navbar.Collapse className="justify-content-end">
@@ -70,5 +82,6 @@ export default function NavbarScreen() {
                 </Nav>
             </Container>
         </Navbar>
+        
     </>)
 };
