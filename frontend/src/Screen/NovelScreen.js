@@ -1,5 +1,4 @@
-import { Container, ToggleButton, Row, Col, ListGroup, Badge } from 'react-bootstrap';
-import BookCover from '../images/bookCover.jpg'
+import { Container, ToggleButton, Row, Col, ListGroup, Badge, Figure } from 'react-bootstrap';
 import { useCallback, useEffect, useState } from 'react';
 import { api } from '../api';
 import { isLogin } from '../auth';
@@ -94,7 +93,12 @@ export default function NovelScreen() {
                     <Col></Col>
                     <Col>
                         <br />
-                        <img src={BookCover} fluid alt={novel.name} />
+                        <Figure.Image
+                            width={307}
+                            height={462}
+                            alt={novel.name}
+                            src={novel.image}
+                        />
                     </Col>
                     <Col></Col>
                 </Row>
@@ -118,7 +122,9 @@ export default function NovelScreen() {
                 <Row>
                     <h3>เรื่องย่อ</h3>
                     <Col >
-                        <div className='content-summary'>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxcdddxxx</div>
+                        <div className='content-summary'>
+                            {novel.title}
+                        </div>
                     </Col>
 
                 </Row>
@@ -129,7 +135,11 @@ export default function NovelScreen() {
                         <ListGroup defaultActiveKey="#link1">
                             {novel.allChapter?.map((chap, index) => {
                                 return <ListGroup.Item action onClick={handleSelChap(chap._id)} className="d-flex justify-content-between align-items-start" key={index}>
+
                                     <div className="ms-2 me-auto">{index + 1}. {chap.name}</div>
+                                    {
+                                        chap.price === 0 && ownedChap(chap._id) === 0 ? <Badge bg="info" pill>อ่านฟรี</Badge> : null
+                                    }
                                     {
                                         renderChapterStatus(ownedChap(chap._id))
                                     }

@@ -13,6 +13,10 @@ export default function WriterRegisterScreen() {
 
     async function handleSubmit(e) {
         e.preventDefault();
+        if (!/[a-z]/.test(name) && !/[A-Z]/.test(name)) {
+            Swal.fire('Display Name Fail!!', "Display Name ต้องมีตัวอักษร", "warning")
+            return;
+        }
         if (password !== confirmPassword) {
             setPassword("");
             setConfirmpassword("");
@@ -50,7 +54,7 @@ export default function WriterRegisterScreen() {
 
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control value={password} type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+                        <Form.Control required pattern='[a-zA-Z0-9_]*' title='Input only a-z A-Z 0-9 _ ' minLength={8} maxLength={20} value={password} type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
                         <Form.Text className="text-muted">
                             Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
                         </Form.Text>
@@ -58,7 +62,7 @@ export default function WriterRegisterScreen() {
 
                     <Form.Group className="mb-3" controlId="formConfirmPassword">
                         <Form.Label>  Confirm Password</Form.Label>
-                        <Form.Control value={confirmPassword} type="password" placeholder="Confirm Password" onChange={(e) => setConfirmpassword(e.target.value)} />
+                        <Form.Control required pattern='[a-zA-Z0-9_]*' title='Input only a-z A-Z 0-9 _ ' minLength={8} maxLength={20} value={confirmPassword} type="password" placeholder="Confirm Password" onChange={(e) => setConfirmpassword(e.target.value)} />
                     </Form.Group>
                     <Button variant="primary" type="submit">
                         Submit

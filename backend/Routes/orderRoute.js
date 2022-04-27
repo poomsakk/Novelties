@@ -4,6 +4,7 @@ import User from '../Models/userModel.js';
 import OrderChapterModel from "../Models/orderChapter.js";
 import NovelModel from "../Models/novelModel.js";
 import jwt from 'jsonwebtoken';
+import Writer from '../Models/writerModel.js';
 
 const orderRouter = express.Router();
 
@@ -68,6 +69,12 @@ orderRouter.post('/buychapter', async (req, res) => {
     const oldcoinnovel = novell.coinRecieve
     novell.coinRecieve = oldcoinnovel + req.body.price
     await novell.save()
+
+    //add coin to writer
+    const writerr = await Writer.findById(novell.writerId)
+    const oldWriterCoin = writerr.coinRecieved
+    writerr.coinRecieved = oldWriterCoin + req.body.price
+    await writerr.save()
 
     //create order
     const oderchap = new OrderChapterModel({
