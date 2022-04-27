@@ -38,10 +38,14 @@ const data = {
             category: [{ name: "adventure" }, { name: "adult" }],
             allViewers: "4100000",
             rating: { allScore: "500", count: "20" },
-            image: "/dsdsd/imaage.jpeg",
+            image: "../images/bookCover.jpg",
             allChapter: [
                 { chapter: "1", name: "chap name1", detail: "dasdsadsadsadas", price: "400", viewers: "201" },
                 { chapter: "2", name: "chap name2", detail: "dasdsdasdsaddsasadas", price: "400", viewers: "201" },
+                { chapter: "3", name: "chap name3", detail: "dasdsdasdsaddsasadas", price: "400", viewers: "201" },
+                { chapter: "4", name: "chap name4", detail: "dasdsdasdsaddsasadas", price: "400", viewers: "201" },
+                { chapter: "5", name: "chap name5", detail: "dasdsdasdsaddsasadas", price: "400", viewers: "201" },
+                { chapter: "6", name: "chap name6", detail: "dasdsdasdsaddsasadas", price: "400", viewers: "201" },
             ]
         },
         {
@@ -51,7 +55,7 @@ const data = {
             allViewers: "4100000",
             rating: { allScore: "500", count: "20" },
             writerId: "sddsdadsds",
-            image: "/dsdsd/imaage.jpeg",
+            image: "../images/bookCover.jpg",
             allChapter: [
                 { chapter: "1", name: "chap name1", detail: "dasdsadsadsadas", viewers: "201" },
                 { chapter: "2", name: "chap name2", detail: "dasdsdasdsaddsasadas", viewers: "201" },
