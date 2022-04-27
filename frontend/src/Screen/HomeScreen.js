@@ -1,5 +1,8 @@
 import { Carousel, Card, Row, Col, Container, ListGroup, Badge } from 'react-bootstrap';
 import Gray from '../images/gray.png'
+import e1 from '../images/event1.png'
+import e2 from '../images/event2.png'
+import e3 from '../images/event3.png'
 import { useCallback, useEffect, useState } from 'react';
 import { api } from '../api';
 import { useNavigate } from 'react-router-dom';
@@ -36,34 +39,31 @@ export default function HomeScreenContent() {
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src={Gray}
+                    src={e1}
                     alt="First slide"
                 />
                 <Carousel.Caption>
-                    <h3>First slide label</h3>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src={Gray}
+                    src={e2}
                     alt="Second slide"
                 />
                 <Carousel.Caption>
-                    <h3>Second slide label</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src={Gray}
+                    src={e3}
                     alt="Third slide"
                 />
                 <Carousel.Caption>
-                    <h3>Third slide label</h3>
-                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+
                 </Carousel.Caption>
             </Carousel.Item>
         </Carousel>
