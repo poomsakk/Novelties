@@ -1,12 +1,14 @@
-import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
+import { useState } from 'react';
+import { Navbar, Container, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from "react-redux"
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { changeUserInfo } from '../action/userAction';
 import { isWriter } from '../auth';
 export default function NavbarScreen() {
     const { userInfo } = useSelector(state => state.userInfo)
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [searchText, setSearchText] = useState("")
 
 
     const handleSelect = (eventKey) => {
@@ -15,6 +17,20 @@ export default function NavbarScreen() {
             localStorage.clear()
             navigate('/')
         }
+        if (eventKey === "topup") {
+            navigate("/topuphistory")
+        }
+        if (eventKey === "edit") {
+            navigate("/editprofile")
+        }
+        if (eventKey === "novel") {
+            navigate("/novelhistory")
+        }
+    }
+
+    function handleSearchSubmit(e) {
+        console.log(searchText)
+        navigate("/search/" + searchText)
     }
 
     return (<>
@@ -33,6 +49,18 @@ export default function NavbarScreen() {
                     {userInfo && !isWriter() ? (<Nav.Link href="/topup"> Coin: {userInfo.coin}</Nav.Link>) : null}
                     {!userInfo && !isWriter() ? <Nav.Link href="/writer/login">Creater?</Nav.Link> : null}
                 </Nav>
+                <div className='span2'>
+                    <Form className="d-flex me-2" onSubmit={handleSearchSubmit}>
+                        <FormControl
+                            type="search"
+                            placeholder="Search"
+                            className="me-2"
+                            aria-label="Search"
+                            onChange={e => { setSearchText(e.target.value) }}
+                        />
+                        <Button variant="outline-success" type='submit'>Search</Button>
+                    </Form>
+                </div>
                 <Navbar.Toggle />
                 <Nav onSelect={handleSelect}>
                     <Navbar.Collapse className="justify-content-end">
@@ -59,9 +87,8 @@ export default function NavbarScreen() {
                                 ) :
                                 (<>
                                     <Navbar.Text>
-                                        <h5><a href="/login">Log in</a></h5>
+                                        <Link to="/login">Log in</Link>
                                     </Navbar.Text>
-
                                 </>
                                 )
                         }

@@ -17,6 +17,10 @@ import PopularScreen from './Screen/PopularScreen';
 import TopupScreen from './Screen/TopupScreen';
 import PayChapterScreen from './Screen/PayChapterScreen';
 import ReadScreen from './Screen/ReadScreen';
+import TopupHistoryScreen from './Screen/TopupHistoryScreen';
+import SearchScreen from './Screen/SearchScreen';
+import EditProfileScreen from './Screen/EditProfileScreen';
+import NovelHistoryScreen from './Screen/NovelHistoryScreen';
 
 function App() {
   return (
@@ -40,6 +44,10 @@ function App() {
           <Route path='/topup' element={<TopupScreen></TopupScreen>}></Route>
           <Route path="/novel/:id/paychapter/:chapid" element={<PayChapterScreen></PayChapterScreen>}></Route>
           <Route path="/novel/:id/read/:chapid" element={<ReadScreen></ReadScreen>}></Route>
+          <Route path='/topuphistory' element={<TopupHistoryScreen></TopupHistoryScreen>}></Route>
+          <Route path='/search/:searchtext' element={<SearchScreen></SearchScreen>}></Route>
+          <Route path='/editprofile' element={<EditProfileScreen></EditProfileScreen>}></Route>
+          <Route path='/novelhistory' element={<NovelHistoryScreen></NovelHistoryScreen>}></Route>
         </Routes>
       </main>
     </>

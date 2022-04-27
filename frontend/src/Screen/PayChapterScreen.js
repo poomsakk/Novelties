@@ -1,6 +1,5 @@
 import { Container, Col, Row, Button, Modal, Figure } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import BookCover from '../images/bookCover.jpg';
 import { useNavigate, useParams } from "react-router-dom";
 import { isLogin } from "../auth.js";
 import Swal from 'sweetalert2';
@@ -26,7 +25,7 @@ export default function PayChapterScreen() {
 
     const userid = userInfo._id
     var buytype = null
-    var price = 20
+    var price = 5
     const novelid = id
 
     async function handleRent() {
@@ -52,6 +51,8 @@ export default function PayChapterScreen() {
     async function handleBuy() {
         buytype = "BUY"
         price = novel.allChapter?.find(x => x._id === chapid).price
+        console.log(price)
+        console.log(novel)
         if (userInfo.coin < price) {
             navigate("/topup")
             Swal.fire('เงินของคุณไม่เพียงพอ', "", "warning")
@@ -90,8 +91,8 @@ export default function PayChapterScreen() {
                     <Figure.Image
                         width={307}
                         height={462}
-                        alt="307x462"
-                        src={BookCover}
+                        alt={novel.name}
+                        src={novel.image}
                     />
                 </Col>
                 <Col></Col>
@@ -113,8 +114,14 @@ export default function PayChapterScreen() {
 
                 </Col>
                 <Col>
-                    <Button variant="success" className="me-2" onClick={handleShow}>เช่า</Button>
-                    <Button variant="success" className="me-2" onClick={handleShow2}>ซื้อถาวร</Button>
+                    {
+                        novel.allChapter?.find(x => x._id === chapid).price === 0 ?
+                            <Button variant="success" className="me-2" onClick={handleShow2}>ซื้อถาวร</Button> :
+                            <>
+                                <Button variant="success" className="me-2" onClick={handleShow}>เช่า</Button>
+                                <Button variant="success" className="me-2" onClick={handleShow2}>ซื้อถาวร</Button>
+                            </>
+                    }
                     <Modal
                         show={show}
                         onHide={handleClose}
@@ -126,7 +133,7 @@ export default function PayChapterScreen() {
                         </Modal.Header>
                         <Modal.Body>
                             <p>สามารถอ่านได้ภายใน 30 วันสำหรับการเช่า</p>
-                            <p>ยอดชำระ 20 coin</p>
+                            <p>ยอดชำระ {novel.allChapter?.find(x => x._id === chapid).price / 5} coin</p>
                         </Modal.Body>
                         <Modal.Footer>
                             <Button variant="secondary" onClick={handleClose}>
@@ -146,7 +153,7 @@ export default function PayChapterScreen() {
                         </Modal.Header>
                         <Modal.Body>
                             <p>เป็นการซื้อแบบถาวร</p>
-                            <p>ยอดชำระ 20 coin</p>
+                            <p>ยอดชำระ {novel.allChapter?.find(x => x._id === chapid).price} coin</p>
                         </Modal.Body>
                         <Modal.Footer>
                             <Button variant="secondary" onClick={handleClose2}>
@@ -158,16 +165,14 @@ export default function PayChapterScreen() {
                 </Col>
             </Row>
             <br></br>
-            <h4>เช่า 20 coin สามารถอ่านได้ 30 วัน</h4>
-            <h4>ซื้อ 20 coin ถาวร</h4>
+            {
+                novel.allChapter?.find(x => x._id === chapid).price === 0 ? <h4>สามารถซื้อได้ในราคา 0 coin(ฟรี)</h4> : <>
+                    <h4>เช่า {novel.allChapter?.find(x => x._id === chapid).price / 5} coin สามารถอ่านได้ 30 วัน</h4>
+                    <h4>ซื้อ {novel.allChapter?.find(x => x._id === chapid).price} coin อยู่ถาวร</h4>
+                </>
+            }
         </Container>
 
 
     );
 }
-//novel.allChapter.find(({ _id }) => _id === chapid).name
-
-{/* <Button variant="secondary" onClick={handleClose2}>
-ปิด
-</Button>
-<Button variant="primary" onClick={handleBuy}>ซื้อถาวร</Button> */}

@@ -9,6 +9,8 @@ import mongoose from "mongoose";
 import cors from 'cors';
 import Novel from "./Models/novelModel.js"
 import orderRouter from "./Routes/orderRoute.js";
+import OrderCoin from "./Models/orderCoin.js"
+import OrderChap from "./Models/orderChapter.js"
 dotenv.config();
 
 const app = express();
@@ -30,9 +32,21 @@ app.get('/api/novels', async (req, res) => {
     const novels = await Novel.find({})
     res.send(novels);
 })
+app.get('/api/novels/search/:searchname', async (req, res) => {
+    const novels = await Novel.find({ name: req.params.searchname })
+    res.send(novels);
+})
 app.get('/api/novels/:id', async (req, res) => {
     const novel = await Novel.findOne({ _id: req.params.id });
     res.send(novel);
+})
+app.get('/api/order/coinhistory/:userid', async (req, res) => {
+    const history = await OrderCoin.find({ userId: req.params.userid })
+    res.send(history)
+})
+app.get('/api/order/chapterhistory/:userid', async (req, res) => {
+    const history = await OrderChap.find({ userId: req.params.userid })
+    res.send(history)
 })
 
 const port = process.env.PORT || 5000;

@@ -45,6 +45,7 @@ writerRouter.post('/login', async (req, res) => {
                 name: user.name,
                 email: user.email,
                 ownNovel: user.ownNovel,
+                coinRecieved: user.coinRecieved,
                 token: jwt.sign({ name: user.name, email: user.email, id: user._id }, "Secret", { expiresIn: "2d" })
             });
         }

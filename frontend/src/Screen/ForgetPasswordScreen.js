@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Form } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 
 export default function ForgetPasswordScreen() {
     /*const [password, ForgetPassword] = useState("")*/
@@ -7,7 +8,7 @@ export default function ForgetPasswordScreen() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-
+        Swal.fire('ส่งอีเมลไปแล้วนะ', '', 'success')
     }
 
     return (
@@ -24,7 +25,7 @@ export default function ForgetPasswordScreen() {
                     </Form.Group>
                     <br></br>
                     <div className="d-grid gap-2">
-                        <button class="btn btn-primary" type="Submit">Reset password</button>
+                        <Button class="btn btn-primary" type="Submit">Reset password</Button>
                     </div>
                     <br></br>
                     <br></br>

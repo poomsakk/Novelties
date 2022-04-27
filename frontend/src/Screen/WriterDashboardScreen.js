@@ -1,19 +1,25 @@
 import { useState } from 'react';
-import { Table, Container, Button, Form, Modal } from 'react-bootstrap';
+import { Table, Container, Button, Form, Modal, Col, Row } from 'react-bootstrap';
 import { api } from "../api"
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { isWriter } from '../auth';
 import { useCallback } from 'react';
+import { useSelector } from 'react-redux';
 
 export default function WriterDashboardScreen() {
     const navigate = useNavigate()
+    const { userInfo } = useSelector(state => state.userInfo)
 
     const [show, setShow] = useState(false);
     const [error_alert, setError_alert] = useState(false);
+    const [loading, setLoading] = useState(false)
+    const [imageUrl, setImageUrl] = useState("")
 
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+        setShow(false)
+    }
     const handleShow = () => { setShow(true); alertClose() };
     const alertClose = () => setError_alert(true);
     const alertShow = () => setError_alert(false);
@@ -32,7 +38,7 @@ export default function WriterDashboardScreen() {
             if (adventure) category.push({ name: "adventure" })
             if (drama) category.push({ name: "drama" })
             if (fantasy) category.push({ name: "fantasy" })
-            const image = "../images/bookCover.jpg"
+            const image = imageUrl
             const user = JSON.parse(localStorage.getItem("userInfo"))
             const writerid = String(user._id)
             const { data } = await api.post("/api/novels/addnovel", { novelName, category, image, writerid, title });
@@ -58,6 +64,23 @@ export default function WriterDashboardScreen() {
         [navigate],
     )
 
+    async function uploadImage(e) {
+        const files = e.target.files
+        const data = new FormData()
+        data.append('file', files[0])
+        data.append('upload_preset', 'novelties')
+        setLoading(true)
+        const res = await fetch("https://api.cloudinary.com/v1_1/dhweyvzzp/image/upload",
+            {
+                method: 'POST',
+                body: data
+            })
+        const file = await res.json()
+        //store file.url or file.secure_url
+        setImageUrl(file.url)
+        setLoading(false)
+    }
+
     //list novel
     const [novels, setNovels] = useState([]);
 
@@ -73,6 +96,8 @@ export default function WriterDashboardScreen() {
             Swal.fire('Cannot enter there', 'please login as writer', 'error')
             navigate("/")
         }
+        setImageUrl("")
+        setLoading(false)
         setNovels([])
         getNovel()
     }, [navigate])
@@ -88,7 +113,7 @@ export default function WriterDashboardScreen() {
                         <th>#</th>
                         <th>Novel Name</th>
                         <th>All coin recieve</th>
-                        <th>Salary recieve</th>
+                        <th>Rating</th>
                         <th>Comment</th>
                         <th>Latest Chapter</th>
                         <th>Add chapter/End</th>
@@ -101,8 +126,8 @@ export default function WriterDashboardScreen() {
                                 <td>{idx + 1}</td>
                                 <td>{novel.name}</td>
                                 <td>{novel.coinRecieve}</td>
-                                <td>xxxxxxx</td>
-                                <td>xxxxxx</td>
+                                <td>{novel.rating.allScore / novel.rating.allScore}</td>
+                                <td>22222</td>
                                 <td>{novel.allChapter.length}</td>
                                 <td><Button variant="primary" size="sm" onClick={handleSelChap(novel._id)}>add Chapter</Button>{'       '}
                                     <Button variant="danger" size="sm">End</Button></td>
@@ -173,8 +198,21 @@ export default function WriterDashboardScreen() {
                             <Form.Control value={title} as="textarea" rows={3} onChange={(e) => setTitle(e.target.value)} />
                         </Form.Group>
                         <Form.Group controlId="formFile" className="mb-3">
-                            <Form.Label>ภาพหน้าปก</Form.Label>
-                            <Form.Control type="file" />
+                            <Form.Label>ภาพหน้าปก (400x600 px)</Form.Label>
+                            <Form.Control type="file" name='file' onChange={uploadImage} />
+                        </Form.Group>
+                        <Form.Group>
+                            <Container>
+                                <Row>
+                                    <Col></Col>
+                                    <Col>
+                                        {
+                                            loading ? <h3>LOADING ...</h3> : (null)
+                                        }
+                                    </Col>
+                                    <Col></Col>
+                                </Row>
+                            </Container>
                         </Form.Group>
                     </Form>
                 </Modal.Body>
@@ -182,11 +220,14 @@ export default function WriterDashboardScreen() {
                     <Button variant="secondary" onClick={handleClose} setNovelName="">
                         ปิด
                     </Button>
-                    <Button variant="primary" onClick={handleSubmit} type="submit">
-                        เพิ่มเรื่องใหม่
-                    </Button>
+                    <Button variant="primary" onClick={handleSubmit} type="submit" disabled={loading || imageUrl === ""}>เพิ่มเรื่องใหม่</Button>
                 </Modal.Footer>
             </Modal>
+            <br /><br />
+            <p>เหรียญที่ได้ทั้งหมด : {userInfo.coinRecieved} coin</p>
+            <Button>ถอนเงิน</Button>
+            <br /><br />
+            <p> *** 100 coin = 60 บาท ***</p>
         </Container>
     </>)
 }

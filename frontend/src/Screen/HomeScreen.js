@@ -1,10 +1,10 @@
 import { Carousel, Card, Row, Col, Container, ListGroup, Badge } from 'react-bootstrap';
 import Gray from '../images/gray.png'
-import BookCover from '../images/bookCover.jpg'
 import { useCallback, useEffect, useState } from 'react';
 import { api } from '../api';
 import { useNavigate } from 'react-router-dom';
 import { isWriter } from '../auth';
+import FooterScreen from './FooterScreen';
 
 export default function HomeScreenContent() {
     const [novels, setNovels] = useState([]);
@@ -79,7 +79,7 @@ export default function HomeScreenContent() {
                 {novels.map((novel) => {
                     return <Col>
                         <Card tag="a" onClick={handleSelNovel(novel._id)} style={{ cursor: "pointer" }}>
-                            <Card.Img variant="top" src={BookCover} />
+                            <Card.Img variant="top" src={novel.image} alt={novel.name} />
                             <Card.Body>
                                 <Card.Title>{novel.name}</Card.Title>
                                 <ListGroup variant="flush">
@@ -95,6 +95,7 @@ export default function HomeScreenContent() {
             </Row>
             <br /><br /><br /><br />
         </Container>
+        <FooterScreen></FooterScreen>
     </>)
 };
 

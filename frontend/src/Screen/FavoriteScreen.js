@@ -1,22 +1,83 @@
-import { Button } from 'react-bootstrap';
-import data from "../sampleData.js";
+import { Card, Container, ListGroup, Badge, Col, Row, CardGroup, Button } from 'react-bootstrap';
+import React, { useCallback, useEffect, useState } from 'react';
+import { api } from '../api.js';
 import { isWriter } from '../auth.js';
-export default function FavoriteScreen() {
-    const user = data.Users[0]
+import { useNavigate } from 'react-router-dom';
 
-    function hand(e) {
-        console.log(isWriter())
+export default function FavoriteScreen() {
+    //const novels = data.Novel
+    const [novels, setNovels] = useState([]);
+    const navigate = useNavigate();
+
+    const getNovel = () => {
+        return api.get("/api/novels")
+            .then((response) => setNovels(response.data));
     }
+
+    const handleSelNovel = useCallback(
+        (novelId) => () => {
+            // novelId is string
+            navigate("/novel/" + novelId);
+        },
+        [navigate],
+    )
+
+    useEffect(() => {
+        if (isWriter()) {
+            navigate("/writer/dashboard")
+        }
+        setNovels([])
+        getNovel()
+        novels.sort((a, b) => (a.allViewers < b.allViewers) ? 1 : -1)
+    }, [navigate])
 
     return (
         <>
-            <h1>Favorite</h1>
-            {
-                user.favorite?.map((chap) => {
-                    return <h2>{chap.name}</h2>
-                })
-            }
-            <Button variant="primary" onClick={hand}>button</Button>
+            <Container>
+                <h1>Popular Novels</h1>
+                {/* <Button variant="danger" onClick={handle}>del</Button> */}
+                <br></br>
+                {novels.map((novel) => {
+                    // novel.allViewers.sort()
+                    return <Row >
+                        <Col>
+                            <CardGroup onClick={handleSelNovel(novel._id)} style={{ cursor: "pointer" }}>
+                                <Col sm={2}>
+                                    <Card>
+                                        <Card.Body>
+                                            <Card.Img variant="top" src={novel.image} />
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
+                                <Col>
+                                    <Card >
+                                        <Card.Body>
+                                            <Card.Title style={{ fontSize: 24 }}>{novel.name}</Card.Title>
+                                            <Card.Text style={{ fontSize: 15 }}>{novel.detail}</Card.Text>
+                                            <Col>
+                                                {novel.category.map((categories) => {
+                                                    return <Button variant="outline-danger" style={{ fontSize: 10 }}>{categories.name}</Button>
+                                                })}
+                                            </Col>
+                                            <ListGroup variant="flush">
+                                                <ListGroup.Item style={{ fontSize: 15 }}><Badge bg="primary">{novel.allViewers}</Badge> views</ListGroup.Item>
+                                                <ListGroup.Item style={{ fontSize: 15 }}>Rating <Badge bg="warning">{novel.rating.allScore / novel.rating.count}</Badge></ListGroup.Item>
+                                                <ListGroup.Item style={{ fontSize: 15 }}> Chapter : {novel.allChapter.length}</ListGroup.Item>
+                                            </ListGroup>
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
+                            </CardGroup>
+                        </Col>
+                        <Col xs lg="2">
+                            <Button variant="danger" size="sm">Remove from favorite</Button>
+                        </Col>
+                    </Row>
+                    // {/* </Card> */}
+                })}
+            </Container>
+            <br /><br /><br /><br />
         </>
+
     )
 };
