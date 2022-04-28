@@ -7,7 +7,8 @@ DB - MongoDB, Cloudinary <br />
 
 ### Details
 เว็บไซต์ เช่า/ซื้อ อ่านนิยายออนไลน์ <br />
-rent/buy  novels online website 
+rent/buy  novels online website <br />
+
 
 ## Contributor
 - [POOMSAK KAEWSEE](https://github.com/premmm123)<br />
@@ -41,3 +42,4 @@ MERN Stack
    ```
    npm start
    ```
+### **ใช้เพื่อการศึกษาเท่านั้น/For educational purposes only**
