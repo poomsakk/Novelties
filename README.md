@@ -21,7 +21,7 @@ rent/buy  novels online website <br />
 MERN Stack
 
 ## Caution
-- ตัวเว็บยังขาดการ authen ด้วย HWT หลังบ้านอยู่ / The content still lacks authentication with JWT in the backend.
+- ตัวเว็บยังขาดการ authen ด้วย JWT หลังบ้านอยู่ / The content still lacks authentication with JWT in the backend.
 
 ## Getting start
 1. install npm packages in frontend folder<br />
