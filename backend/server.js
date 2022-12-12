@@ -49,6 +49,10 @@ app.get('/api/order/chapterhistory/:userid', async (req, res) => {
     res.send(history)
 })
 
+app.get('/', async (req, res) => {
+    res.send("Hello")
+})
+
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
     console.log("Sever is running on port ", port);
