@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-    baseURL: 'http://raspberrypi.local:8010'
+    baseURL: 'http://api.novelties.poomsakk.com/'
 });
 
 // 'http://localhost:5000'
