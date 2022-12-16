@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-    baseURL: 'http://api.novelties.poomsakk.com/'
+    baseURL: 'https://noveltiesbackend.poomsakk.com/'
 });
 
 // 'http://localhost:5000'
